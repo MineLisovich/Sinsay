@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using Sinsay.Models;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -9,6 +10,7 @@ namespace Sinsay
     /// </summary>
     public partial class App : Application
     {
+        public static AppUser currentUser = null;
     }
 
 }
