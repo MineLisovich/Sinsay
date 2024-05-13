@@ -1,6 +1,8 @@
 ﻿using Sinsay.Models;
 using Sinsay.Sevices.AuthService;
 using Sinsay.Views.Account;
+using Sinsay.Views.Admin;
+using Sinsay.Views.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.Windows.Navigation;
 namespace Sinsay
 {
     /// <summary>
@@ -22,26 +24,42 @@ namespace Sinsay
     /// </summary>
     public partial class MainWindow : Window
     {
-       AuthService _authService = new();
+        AuthService _authService = new();
         public MainWindow()
         {
             InitializeComponent();
-           
+
         }
 
         private void HLinkRegistrationClick(object sender, RoutedEventArgs e)
         {
-            
+            SignUpPage signUpPage = new SignUpPage();
+            signUpPage.Show();
+            this.Close();
         }
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            try 
-            { 
-                if(!String.IsNullOrEmpty(tb_Email.Text) && !String.IsNullOrEmpty(tb_Password.Password))
+            try
+            {
+                if (!String.IsNullOrEmpty(tb_Email.Text) && !String.IsNullOrEmpty(tb_Password.Password))
                 {
-                     AppUser user = _authService.SignIn(email: tb_Email.Text, password: tb_Password.Password);
-                     App.currentUser = user;        
+                    AppUser user = _authService.SignIn(email: tb_Email.Text, password: tb_Password.Password);
+                    App.currentUser = user;
+                    //admin
+                    if (user.RoleId == 1)
+                    {
+                        AdminHomePage adminHomePage = new AdminHomePage();
+                        adminHomePage.Show();
+                        this.Close();
+                    }
+                    //user
+                    else if (user.RoleId == 2)
+                    {
+                        UserHomePage userHomePage = new UserHomePage();
+                        userHomePage.Show();
+                        this.Close();
+                    }
                 }
                 else
                 {
