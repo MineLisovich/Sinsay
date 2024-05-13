@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sinsay.ViewsModels.AdminVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Sinsay.Views.Admin.WindowsManagerData.WindowsCityData
         public AddCity()
         {
             InitializeComponent();
+            DataContext = new AdminDataManagerVM();
         }
     }
 }

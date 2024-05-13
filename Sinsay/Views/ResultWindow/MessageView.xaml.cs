@@ -1,6 +1,4 @@
-﻿using Sinsay.Models;
-using Sinsay.ViewsModels.AdminVM;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Sinsay.Views.Admin.WindowsManagerData.WindowsCityData
+namespace Sinsay.Views.ResultWindow
 {
     /// <summary>
-    /// Interaction logic for EditCity.xaml
+    /// Interaction logic for MessageView.xaml
     /// </summary>
-    public partial class EditCity : Window
+    public partial class MessageView : Window
     {
-        public EditCity(City city)
+        public MessageView(string text)
         {
             InitializeComponent();
-            DataContext = new AdminDataManagerVM();
-            AdminDataManagerVM.SelectedCity = city;
-            AdminDataManagerVM.NameCity = city.Name;
+            MessageText.Text = text;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

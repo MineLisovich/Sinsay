@@ -1,4 +1,5 @@
 ﻿using Sinsay.Views.Admin.WindowsManagerData.WindowsCityData;
+using Sinsay.ViewsModels.AdminVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,20 +21,17 @@ namespace Sinsay.Views.Admin
     /// </summary>
     public partial class AdminHomePage : Window
     {
+        public static ListView AllCitiesLV;
         public AdminHomePage()
         {
             InitializeComponent();
+            DataContext = new AdminDataManagerVM();
+            AllCitiesLV = ViewAllCities;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             TbUserName.Text = $"Привет, {App.currentUser.UserName}";
-        }
-
-        private void AddCity_Click(object sender, RoutedEventArgs e)
-        {
-            AddCity addCity = new();
-            addCity.Show();
         }
     }
 }

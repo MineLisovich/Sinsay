@@ -25,7 +25,7 @@
             <Button x:Name="LogOut" Content="Выйти"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
         </StackPanel>
         <!--END HEADER-->
-        <TabControl Grid.Row="1">
+        <TabControl Grid.Row="1" SelectedItem="{Binding SelectedTab}">
             <!--Товары-->
             <TabItem Name="ClothesTab">
                 <TabItem.Header>
@@ -143,21 +143,27 @@
                 <TabItem.Header>
                     <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Города"/>
                 </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Изменть" Command="{Binding OpenEditItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="1">
+                    <ListView x:Name="ViewAllCities" Grid.Row="1" ItemsSource="{Binding AllCities}" SelectedItem="{Binding SelectedCity}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id"/>
-                                <GridViewColumn Header="Наименование"/>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Path=Name}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" x:Name="AddCity" Click="AddCity_Click" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" x:Name="AddCity" Command="{Binding OpenAddCityWnd}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
                 </Grid>
             </TabItem>
             <!--END Справочник города-->
