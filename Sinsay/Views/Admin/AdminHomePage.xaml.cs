@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sinsay.Views.Admin.WindowsManagerData.WindowsCityData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,12 @@ namespace Sinsay.Views.Admin
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             TbUserName.Text = $"Привет, {App.currentUser.UserName}";
+        }
+
+        private void AddCity_Click(object sender, RoutedEventArgs e)
+        {
+            AddCity addCity = new();
+            addCity.Show();
         }
     }
 }

@@ -5,9 +5,209 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sinsay.Views.Admin"
         mc:Ignorable="d"
-        Title="AdminHomePage" Height="450" Width="800"
+        Title="Sinsay - Администрирование" Height="720" Width="1024"
+        WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
     <Grid>
-        <TextBlock x:Name="TbUserName"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="40"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <!--HEADER-->
+        <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Orientation="Horizontal">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Matura MT Script Capitals" Width="200" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Top"  Orientation="Horizontal">
+            <TextBlock FontFamily="Bahnschrift Condensed" FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
+            <Button x:Name="LogOut" Content="Выйти"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+        </StackPanel>
+        <!--END HEADER-->
+        <TabControl Grid.Row="1">
+            <!--Товары-->
+            <TabItem Name="ClothesTab">
+                <TabItem.Header>
+                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Товары"/>
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id"/>
+                                <GridViewColumn Header="Наименование товара"/>
+                                <GridViewColumn Header="Описание"/>
+                                <GridViewColumn Header="Количество на складе"/>
+                                <GridViewColumn Header="Цена"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                </Grid>
+            </TabItem>
+            <!--END Товары-->
+            <!--Магазины-->
+            <TabItem Name="PickupTab">
+                <TabItem.Header>
+                    <TextBlock FontFamily="Bahnschrift Condensed"  FontSize="16" Text="Магазины"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id"/>
+                                <GridViewColumn Header="Наименование"/>
+                                <GridViewColumn Header="Адрес"/>
+                                <GridViewColumn Header="Город"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                </Grid>
+            </TabItem>
+            <!--END Магазины-->
+            <!--Модерация заказов-->
+            <TabItem Name="OrdesTab">
+                <TabItem.Header>
+                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Модерация заказов"/>
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id"/>
+                                <GridViewColumn Header="Статус заказа"/>
+                                <GridViewColumn Header="Пользователь"/>
+                                <GridViewColumn Header="Перечень заказа"/>
+                                <GridViewColumn Header="Дата заказа"/>
+                                <GridViewColumn Header="Выдача заказа"/>
+                                <GridViewColumn Header="Сумма заказа"/>
+                                <GridViewColumn Header="Способ оплаты"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                </Grid>
+            </TabItem>
+            <!--END Модерация заказов-->
+            <!--Уч записи-->
+            <TabItem Name="UsersTab">
+                <TabItem.Header>
+                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Управление учётными записями"/>
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id"/>
+                                <GridViewColumn Header="Email"/>
+                                <GridViewColumn Header="Имя"/>
+                                <GridViewColumn Header="Номер телефона"/>
+                                <GridViewColumn Header="Роль"/>
+                                <GridViewColumn Header="Последнее посещение"/>
+                                <GridViewColumn Header="Заблокирован"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                </Grid>
+                
+            </TabItem>
+            <!--END Уч записи-->
+            <!--Справочник города-->
+            <TabItem Name="CityTab">
+                <TabItem.Header>
+                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Города"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id"/>
+                                <GridViewColumn Header="Наименование"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" x:Name="AddCity" Click="AddCity_Click" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                </Grid>
+            </TabItem>
+            <!--END Справочник города-->
+            <!--Справочник статусы заказов-->
+            <TabItem Name="OrgerStatusTab">
+                <TabItem.Header>
+                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Статусы заказа"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id"/>
+                                <GridViewColumn Header="Наименование"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                </Grid>
+                
+            </TabItem>
+            <!--END статусы заказов-->
+            <TabItem Name="PaymentMethodsTab">
+                <TabItem.Header>
+                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Способы оплаты"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id"/>
+                                <GridViewColumn Header="Наименование"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                </Grid>
+                
+            </TabItem>
+            <!--END статусы заказов-->
+        </TabControl>
     </Grid>
 </Window>
