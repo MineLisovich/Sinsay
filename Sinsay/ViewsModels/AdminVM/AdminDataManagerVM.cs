@@ -485,7 +485,7 @@ namespace Sinsay.ViewsModels.AdminVM
                     }
                     GlobalUpdateView();
                     GlobalNullValueProp();
-                    ShowMessageToUser(result);
+                   //ShowMessageToUser(result);
                 });
             }
         }

@@ -1,0 +1,53 @@
+﻿<Window x:Class="Sinsay.Views.Admin.WindowsManagerData.WindowsUserData.AddUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sinsay.Views.Admin.WindowsManagerData.WindowsUserData"
+        mc:Ignorable="d"
+               Title="Sinsay - Добавить пользователя" Height="400" Width="400"
+WindowStartupLocation="CenterScreen"
+        Name="AddUserWND">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="TBlockHeder" Text="Добавление пользователя" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="56" Width="266" FontFamily="Bahnschrift Condensed"/>
+            </StackPanel>
+            
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Email:</Label>
+                    <TextBox x:Name="tb_email" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Имя:</Label>
+                    <TextBox x:Name="tb_name" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Номер телефона:</Label>
+                    <TextBox x:Name="tb_phone" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                </StackPanel>
+            </StackPanel>
+
+           <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+              <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                  <Label FontFamily="Bahnschrift Condensed" FontSize="18">Роль:</Label>
+                  <ComboBox x:Name="tb_role" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></ComboBox>
+              </StackPanel>
+          </StackPanel>
+        
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 0">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button x:Name="Add" Content="Добавить"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="22"></Button>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
