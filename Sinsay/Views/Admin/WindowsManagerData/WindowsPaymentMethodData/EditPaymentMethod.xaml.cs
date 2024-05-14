@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sinsay.Models;
+using Sinsay.ViewsModels.AdminVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,12 @@ namespace Sinsay.Views.Admin.WindowsManagerData.WindowsPaymentMethodData
     /// </summary>
     public partial class EditPaymentMethod : Window
     {
-        public EditPaymentMethod()
+        public EditPaymentMethod(PaymentMethod method)
         {
             InitializeComponent();
+            DataContext = new AdminDataManagerVM();
+            AdminDataManagerVM.SelectedPaymentMethod = method;
+            AdminDataManagerVM.NamePaymentMethod = method.Name;
         }
     }
 }

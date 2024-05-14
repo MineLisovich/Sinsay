@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Sinsay.Views.Admin.WindowsManagerData.WindowsPaymentMethodData"
         mc:Ignorable="d"
          Title="Sinsay - Изменение способа оплаты" Height="250" Width="400"
- WindowStartupLocation="CenterScreen">
+ WindowStartupLocation="CenterScreen"
+        Name="EditPaymentWND">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
@@ -17,13 +18,13 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Наименование:</Label>
-                    <TextBox x:Name="tb_name" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_name" Text="{Binding NamePaymentMethod}" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 0">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button x:Name="LogIn" Content="Измененить"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="22"></Button>
+                    <Button Command="{Binding EditPaymentMethod}" CommandParameter="{Binding ElementName=EditPaymentWND}" Content="Измененить"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="22"></Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

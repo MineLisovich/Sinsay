@@ -22,11 +22,15 @@ namespace Sinsay.Views.Admin
     public partial class AdminHomePage : Window
     {
         public static ListView AllCitiesLV;
+        public static ListView AllOrderStatusLV;
+        public static ListView AllPaymentMethodLV;
         public AdminHomePage()
         {
             InitializeComponent();
             DataContext = new AdminDataManagerVM();
             AllCitiesLV = ViewAllCities;
+            AllOrderStatusLV = ViewAllOrderStatus;
+            AllPaymentMethodLV = ViewAllPaymentMethods;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

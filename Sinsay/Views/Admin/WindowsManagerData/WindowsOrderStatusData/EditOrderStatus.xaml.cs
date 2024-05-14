@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sinsay.Models;
+using Sinsay.ViewsModels.AdminVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,12 @@ namespace Sinsay.Views.Admin.WindowsManagerData.WindowsOrderStatusData
     /// </summary>
     public partial class EditOrderStatus : Window
     {
-        public EditOrderStatus()
+        public EditOrderStatus(OrderStatus status)
         {
             InitializeComponent();
+            DataContext = new AdminDataManagerVM();
+            AdminDataManagerVM.SelectedOrderStatus = status;
+            AdminDataManagerVM.NameOrderStatus = status.Name;
         }
     }
 }

@@ -135,7 +135,7 @@
                     </ListView>
                     <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
                 </Grid>
-                
+
             </TabItem>
             <!--END Уч записи-->
             <!--Справочник города-->
@@ -168,52 +168,68 @@
             </TabItem>
             <!--END Справочник города-->
             <!--Справочник статусы заказов-->
-            <TabItem Name="OrgerStatusTab">
+            <TabItem Name="OrderStatusTab">
                 <TabItem.Header>
                     <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Статусы заказа"/>
                 </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Изменть" Command="{Binding OpenEditItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="753*"/>
+                        <ColumnDefinition Width="265*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="1">
+                    <ListView x:Name="ViewAllOrderStatus" ItemsSource="{Binding AllOrderStatuses}" SelectedItem="{Binding SelectedOrderStatus}" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id"/>
-                                <GridViewColumn Header="Наименование"/>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Path=Name}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAddOrderStatusWnd}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20" Grid.ColumnSpan="2"></Button>
                 </Grid>
-                
+
             </TabItem>
-            <!--END статусы заказов-->
+            <!--END Способы оплаты-->
             <TabItem Name="PaymentMethodsTab">
                 <TabItem.Header>
                     <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Способы оплаты"/>
                 </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Изменть" Command="{Binding OpenEditItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="1">
+                    <ListView x:Name="ViewAllPaymentMethods" Grid.Row="1" ItemsSource="{Binding AllPaymentMethods}" SelectedItem="{Binding SelectedPaymentMethod}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id"/>
-                                <GridViewColumn Header="Наименование"/>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Path=Name}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAddPaymentMethod}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
                 </Grid>
-                
+
             </TabItem>
-            <!--END статусы заказов-->
+            <!--END Способы оплаты-->
         </TabControl>
     </Grid>
 </Window>

@@ -1,8 +1,12 @@
 ﻿using Sinsay.Models;
 using Sinsay.Sevices;
 using Sinsay.Sevices.CityService;
+using Sinsay.Sevices.OrderServices;
+using Sinsay.Sevices.PaymentMethodService;
 using Sinsay.Views.Admin;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsCityData;
+using Sinsay.Views.Admin.WindowsManagerData.WindowsOrderStatusData;
+using Sinsay.Views.Admin.WindowsManagerData.WindowsPaymentMethodData;
 using Sinsay.Views.ResultWindow;
 using System;
 using System.Collections.Generic;
@@ -18,6 +22,22 @@ namespace Sinsay.ViewsModels.AdminVM
 {
     public class AdminDataManagerVM : INotifyPropertyChanged
     {
+        #region initialization prop
+        //Global
+        public TabItem SelectedTab { get; set; }
+
+        //City
+        public static City SelectedCity { get; set; }
+        public static string NameCity { get; set; }
+
+        //OrderStatus
+        public static OrderStatus SelectedOrderStatus { get; set; }
+        public static string NameOrderStatus { get; set; }
+
+        //PaymentMethod
+        public static PaymentMethod SelectedPaymentMethod { get; set; }
+        public static string NamePaymentMethod { get; set; }
+        #endregion
 
         #region initialization data
         //City
@@ -25,15 +45,27 @@ namespace Sinsay.ViewsModels.AdminVM
         public List<City> AllCities
         {
             get { return allCities; }
-            set { allCities = value; NotifyPropertyChanged("AllCities"); }
+            set { allCities = value; NotifyPropertyChanged(nameof(AllCities)); }
+        }
+
+        //OrderStatus
+        private List<OrderStatus> allOrderStatuses = OrderStatusService.GetAllOrderStatus();
+        public List<OrderStatus> AllOrderStatuses
+        {
+            get { return allOrderStatuses; }
+            set { allOrderStatuses = value; NotifyPropertyChanged(nameof(AllOrderStatuses)); }
+        }
+
+        //PaymentMethod
+        private List<PaymentMethod> allPaymentMethods = PaymentMethodService.GetAllPaymentMethod();
+        public List<PaymentMethod> AllPaymentMethods
+        {
+            get { return allPaymentMethods; }
+            set { allPaymentMethods = value; NotifyPropertyChanged(nameof(AllPaymentMethods)); }
         }
         #endregion
 
-        #region initialization prop
-        public TabItem SelectedTab { get; set; }
-        public static City SelectedCity { get; set; }
-        public static string NameCity { get; set; }
-        #endregion
+
 
         #region  City (open Create/Edit window, add, edit delete)
         //open add wnd
@@ -71,7 +103,7 @@ namespace Sinsay.ViewsModels.AdminVM
                     {
                         bool result = CityService.AddCity(NameCity);
                         ShowMessageToUser(result);
-                        UpdateTableInCityView();
+                        GlobalUpdateView();
                         NameCity = null;
                         wnd.Close();
                     }                  
@@ -92,7 +124,7 @@ namespace Sinsay.ViewsModels.AdminVM
                     {
                         result = CityService.EditCity(SelectedCity, NameCity);
                         ShowMessageToUser(result);
-                        UpdateTableInCityView();
+                        GlobalUpdateView();
                         NameCity = null;
                         wnd.Close();
                     }
@@ -110,8 +142,159 @@ namespace Sinsay.ViewsModels.AdminVM
         }
         #endregion
 
-        #region Edit || DELETE COMMAND
+        #region OrderStatus (open Create/Edit window, add, edit, delete)
+        //open add wnd
+        private RelayCommand openAddOrderStatusWnd;
+        public RelayCommand OpenAddOrderStatusWnd
+        {
+            get
+            {
+                return openAddOrderStatusWnd ?? new RelayCommand(obj =>
+                {
+                    OpenAddOrderStatusMethod();
+                });
+            }
+        }
+        private void OpenAddOrderStatusMethod()
+        {
+            AddOrderStatus wndOrdStat = new();
+            wndOrdStat.ShowDialog();
+        }
 
+        //add
+        private RelayCommand addNewOrderStatus;
+        public RelayCommand AddNewOrderStatus
+        {
+            get
+            {
+                return addNewOrderStatus ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    if (NameOrderStatus is null || NameOrderStatus.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_name");
+                    }
+                    else
+                    {
+                        bool result = OrderStatusService.AddOrderStatus(NameOrderStatus);
+                        ShowMessageToUser(result);
+                        GlobalUpdateView();
+                        NameOrderStatus = null;
+                        wnd.Close();
+                    }
+                });
+            }
+        }
+
+        //Edit
+        private RelayCommand editOrderStatus;
+        public RelayCommand EditOrderStatus
+        {
+            get
+            {
+                return editOrderStatus ?? new RelayCommand(obj => 
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+                    if(SelectedOrderStatus is not null && NameOrderStatus is not null || NameOrderStatus.Replace(" ", "").Length != 0)
+                    {
+                        result = OrderStatusService.EditOrderStatus(SelectedOrderStatus, NameOrderStatus);
+                        ShowMessageToUser(result);
+                        GlobalUpdateView();
+                        NameOrderStatus = null;
+                        wnd.Close();
+                    }
+                    else
+                    {
+                        ValidationsError(wnd, "tb_name");
+                    }
+                });
+            }
+        }
+
+        private void OpenEditOrderStatus(OrderStatus orderStatus)
+        {
+            EditOrderStatus winEdit = new(orderStatus);
+            winEdit.ShowDialog();
+        }
+        #endregion
+
+        #region PaymentMethod (open Create/Edit wnd, add, edit)
+        //open add wnd
+        private RelayCommand openAddPaymentMethod;
+        public RelayCommand OpenAddPaymentMethod
+        {
+            get
+            {
+                return openAddPaymentMethod ?? new RelayCommand(obj =>
+                {
+                    OpenAddPaymentMethodMet();
+                });
+            }
+        }
+        private void OpenAddPaymentMethodMet()
+        {
+            AddPaymentMethod wnd = new();
+            wnd.ShowDialog();   
+        }
+
+        //add
+        private RelayCommand addNewPaymentMethod;
+        public RelayCommand AddNewPaymentMethod
+        {
+            get
+            {
+                return addNewPaymentMethod ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    if (NamePaymentMethod is null || NamePaymentMethod.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_name");
+                    }
+                    else
+                    {
+                        bool result = PaymentMethodService.AddPaymentMethod(NamePaymentMethod);
+                        ShowMessageToUser(result);
+                        GlobalUpdateView();
+                        NamePaymentMethod = null;
+                        wnd.Close();
+                    }
+                });
+            }
+        }
+
+        //edit
+        private RelayCommand editPaymentMethod;
+        public RelayCommand EditPaymentMethod
+        {
+            get
+            {
+                return editPaymentMethod ?? new RelayCommand(obj => {
+                    Window wnd = obj as Window;
+                    bool result = false;
+                    if (SelectedPaymentMethod is not null && NamePaymentMethod is not null || NamePaymentMethod.Replace(" ", "").Length != 0)
+                    {
+                        result = PaymentMethodService.EditPaymentMethod(SelectedPaymentMethod, NamePaymentMethod);
+                        ShowMessageToUser(result);
+                        GlobalUpdateView();
+                        NamePaymentMethod = null;
+                        wnd.Close();
+                    }
+                    else
+                    {
+                        ValidationsError(wnd, "tb_name");
+                    }
+                });
+            }
+        }
+        private void OpenEditPaymentMethod (PaymentMethod paymentMethod)
+        {
+            EditPaymentMethod wnd = new(paymentMethod);
+            wnd.ShowDialog();
+        }
+        #endregion
+
+        #region Edit || DELETE COMMAND
 
         #region EDIT OPEN WIND
         private RelayCommand openEditItem;
@@ -126,6 +309,16 @@ namespace Sinsay.ViewsModels.AdminVM
                     if (SelectedTab.Name == "CityTab" && SelectedCity is not null)
                     {
                         OpenEditCityMethod(SelectedCity);
+                    }
+                    //OrderStatus
+                    if (SelectedTab.Name == "OrderStatusTab" && SelectedOrderStatus is not null)
+                    {
+                        OpenEditOrderStatus(SelectedOrderStatus);
+                    }
+                    //Payment
+                    if (SelectedTab.Name == "PaymentMethodsTab" && SelectedPaymentMethod is not null)
+                    {
+                        OpenEditPaymentMethod(SelectedPaymentMethod);
                     }
                 });
             }
@@ -147,9 +340,20 @@ namespace Sinsay.ViewsModels.AdminVM
                     if (SelectedTab.Name == "CityTab" && SelectedCity is not null)
                     {
                          result = CityService.DeleteCity(SelectedCity.Id);
-                         GlobalUpdateView();
+                        
                     }
-                   
+
+                    //OrderStatus
+                    if (SelectedTab.Name == "OrderStatusTab" && SelectedOrderStatus is not null)
+                    {
+                      result = OrderStatusService.DeleteOrderStatus(SelectedOrderStatus.Id);
+                    }
+                    //Payment
+                    if (SelectedTab.Name == "PaymentMethodsTab" && SelectedPaymentMethod is not null)
+                    {
+                       result = PaymentMethodService.DeletePaymentMethod(SelectedPaymentMethod.Id);
+                    }
+                    GlobalUpdateView();
                     GlobalNullValueProp();
                     ShowMessageToUser(result);
                 });
@@ -174,10 +378,20 @@ namespace Sinsay.ViewsModels.AdminVM
             //City
             NameCity = null;
             SelectedCity = null;
+
+            //OrederStat
+            NameOrderStatus = null;
+            SelectedOrderStatus = null;
+
+            //Payment
+            NamePaymentMethod = null;
+            SelectedPaymentMethod = null;
         }
         private void GlobalUpdateView()
         {
             UpdateTableInCityView();
+            UpdateTableInOrderStatusView();
+            UpdateTableInPaymentView();
         }
 
         private void UpdateTableInCityView()
@@ -188,6 +402,24 @@ namespace Sinsay.ViewsModels.AdminVM
             AdminHomePage.AllCitiesLV.ItemsSource = AllCities;
             AdminHomePage.AllCitiesLV.Items.Refresh();
         }
+
+        private void UpdateTableInOrderStatusView()
+        {
+            AllOrderStatuses = OrderStatusService.GetAllOrderStatus();
+            AdminHomePage.AllOrderStatusLV.ItemsSource = null;
+            AdminHomePage.AllOrderStatusLV.Items.Clear();
+            AdminHomePage.AllOrderStatusLV.ItemsSource = AllOrderStatuses;
+            AdminHomePage.AllOrderStatusLV.Items.Refresh();
+        }
+        private void UpdateTableInPaymentView()
+        {
+            AllPaymentMethods = PaymentMethodService.GetAllPaymentMethod();
+            AdminHomePage.AllPaymentMethodLV.ItemsSource = null;
+            AdminHomePage.AllPaymentMethodLV.Items.Clear();
+            AdminHomePage.AllPaymentMethodLV.ItemsSource = AllPaymentMethods;
+            AdminHomePage.AllPaymentMethodLV.Items.Refresh();
+        }
+
         #endregion
         private void ShowMessageToUser (bool result)
         {
