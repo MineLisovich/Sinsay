@@ -58,23 +58,33 @@
                 <TabItem.Header>
                     <TextBlock FontFamily="Bahnschrift Condensed"  FontSize="16" Text="Магазины"/>
                 </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Изменть" Command="{Binding OpenEditItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="92*"/>
+                        <ColumnDefinition Width="927*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="1">
+                    <ListView x:Name="ViewAllPickupPoint" ItemsSource="{Binding AllPickupPoint}" SelectedItem="{Binding SelectedPickupPoint}" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id"/>
-                                <GridViewColumn Header="Наименование"/>
-                                <GridViewColumn Header="Адрес"/>
-                                <GridViewColumn Header="Город"/>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Адрес" DisplayMemberBinding="{Binding Path=Address}"/>
+                                <GridViewColumn Header="Город" DisplayMemberBinding="{Binding Path=City.Name}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAddPickupPoint}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20" Grid.ColumnSpan="2"></Button>
                 </Grid>
             </TabItem>
             <!--END Магазины-->

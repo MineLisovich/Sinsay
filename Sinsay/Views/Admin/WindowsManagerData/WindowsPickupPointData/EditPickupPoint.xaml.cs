@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sinsay.Models;
+using Sinsay.ViewsModels.AdminVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,14 @@ namespace Sinsay.Views.Admin.WindowsManagerData.WindowsPickupPointData
     /// </summary>
     public partial class EditPickupPoint : Window
     {
-        public EditPickupPoint()
+        public EditPickupPoint(PickupPoint point)
         {
             InitializeComponent();
+            DataContext = new AdminDataManagerVM();
+            AdminDataManagerVM.SelectedPickupPoint = point;
+            AdminDataManagerVM.NamePickupPoint = point.Name;
+            AdminDataManagerVM.AddressPickupPoint = point.Address;
+            AdminDataManagerVM.SelectListCityPickupPoint = point.City;
         }
     }
 }

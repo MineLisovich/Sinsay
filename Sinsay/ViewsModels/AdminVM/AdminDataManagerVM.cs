@@ -3,10 +3,12 @@ using Sinsay.Sevices;
 using Sinsay.Sevices.CityService;
 using Sinsay.Sevices.OrderServices;
 using Sinsay.Sevices.PaymentMethodService;
+using Sinsay.Sevices.PickiupPointService;
 using Sinsay.Views.Admin;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsCityData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsOrderStatusData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsPaymentMethodData;
+using Sinsay.Views.Admin.WindowsManagerData.WindowsPickupPointData;
 using Sinsay.Views.ResultWindow;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,13 @@ namespace Sinsay.ViewsModels.AdminVM
         //PaymentMethod
         public static PaymentMethod SelectedPaymentMethod { get; set; }
         public static string NamePaymentMethod { get; set; }
+
+        //PickupPoint
+        public static PickupPoint SelectedPickupPoint { get; set; }
+        public static string NamePickupPoint { get; set; }
+        public static string AddressPickupPoint { get; set; }
+        public static City SelectListCityPickupPoint { get; set; }
+
         #endregion
 
         #region initialization data
@@ -62,6 +71,14 @@ namespace Sinsay.ViewsModels.AdminVM
         {
             get { return allPaymentMethods; }
             set { allPaymentMethods = value; NotifyPropertyChanged(nameof(AllPaymentMethods)); }
+        }
+
+        //PickupPoint
+        private List<PickupPoint> allPickupPoint = PickiupPointService.GetAllPickupPoint();
+        public List<PickupPoint> AllPickupPoint
+        {
+            get { return allPickupPoint; }
+            set { allPickupPoint = value; NotifyPropertyChanged(nameof(AllPickupPoint));}
         }
         #endregion
 
@@ -294,6 +311,109 @@ namespace Sinsay.ViewsModels.AdminVM
         }
         #endregion
 
+        #region PickupPoint
+        //open add wnd
+        private RelayCommand openAddPickupPoint;
+        public RelayCommand OpenAddPickupPoint
+        {
+            get
+            {
+                return openAddPickupPoint ?? new RelayCommand(obj =>
+                {
+                    OpenAddPickupPointMethod();
+                });
+            }
+        }
+        private void OpenAddPickupPointMethod()
+        {
+            AddPickupPoint wnd = new();
+            wnd.ShowDialog();
+        }
+
+        //add
+        private RelayCommand addNewPickupPoint;
+        public RelayCommand AddNewPickupPoint
+        {
+            get
+            {
+                return addNewPickupPoint ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+                    if (NamePickupPoint is null || NamePickupPoint.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_name");
+                    }
+                    else if (AddressPickupPoint is null || AddressPickupPoint.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_address");
+                    }
+                    else if(SelectListCityPickupPoint is null)
+                    {
+                        MessageBox.Show("Укажите город");
+                    }
+                    else
+                    {
+                        result = PickiupPointService.AddPickupPoint(name: NamePickupPoint, address: AddressPickupPoint, _city: SelectListCityPickupPoint);
+                        ShowMessageToUser(result);
+                        GlobalUpdateView();
+                        NamePickupPoint = null;
+                        AddressPickupPoint = null;
+                        SelectListCityPickupPoint = null;
+                        wnd.Close();
+                    }
+                });
+            }
+        }
+
+        //edit
+        private RelayCommand editNewPicupPoint;
+        public RelayCommand EditNewPicupPoint
+        {
+            get
+            {
+                return editNewPicupPoint ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+                    if(SelectedPickupPoint is not null)
+                    {
+                        if (NamePickupPoint is null || NamePickupPoint.Replace(" ", "").Length == 0)
+                        {
+                            ValidationsError(wnd, "tb_name");
+                        }
+                        else if (AddressPickupPoint is null || AddressPickupPoint.Replace(" ", "").Length == 0)
+                        {
+                            ValidationsError(wnd, "tb_address");
+                        }
+                        else if (SelectListCityPickupPoint is null)
+                        {
+                            MessageBox.Show("Укажите город");
+                        }
+                        else
+                        {
+                            result = PickiupPointService.EditPickupPoint(pickupPoint:SelectedPickupPoint,name: NamePickupPoint, address: AddressPickupPoint, _city: SelectListCityPickupPoint);
+                            ShowMessageToUser(result);
+                            GlobalUpdateView();
+                            NamePickupPoint = null;
+                            AddressPickupPoint = null;
+                            SelectListCityPickupPoint = null;
+                            wnd.Close();
+                        }
+                    }
+                });
+            }
+        }
+        private void OpenEditPickupPointMethod(PickupPoint point)
+        {
+            EditPickupPoint wnd = new(point);
+            wnd.ShowDialog();
+        }
+        #endregion
+
+
+
+
         #region Edit || DELETE COMMAND
 
         #region EDIT OPEN WIND
@@ -319,6 +439,11 @@ namespace Sinsay.ViewsModels.AdminVM
                     if (SelectedTab.Name == "PaymentMethodsTab" && SelectedPaymentMethod is not null)
                     {
                         OpenEditPaymentMethod(SelectedPaymentMethod);
+                    }
+                    //PickupPoint
+                    if (SelectedTab.Name == "PickupTab" && SelectedPickupPoint is not null)
+                    {
+                        OpenEditPickupPointMethod(SelectedPickupPoint);
                     }
                 });
             }
@@ -353,6 +478,11 @@ namespace Sinsay.ViewsModels.AdminVM
                     {
                        result = PaymentMethodService.DeletePaymentMethod(SelectedPaymentMethod.Id);
                     }
+                    //PickupPoint
+                    if (SelectedTab.Name == "PickupTab" && SelectedPickupPoint is not null)
+                    {
+                        result = PickiupPointService.DeletePickupPoint(SelectedPickupPoint.Id);
+                    }
                     GlobalUpdateView();
                     GlobalNullValueProp();
                     ShowMessageToUser(result);
@@ -386,12 +516,18 @@ namespace Sinsay.ViewsModels.AdminVM
             //Payment
             NamePaymentMethod = null;
             SelectedPaymentMethod = null;
+
+            //PickupPoint
+            NamePickupPoint = null;
+            AddressPickupPoint = null;
+            SelectListCityPickupPoint = null;
         }
         private void GlobalUpdateView()
         {
             UpdateTableInCityView();
             UpdateTableInOrderStatusView();
             UpdateTableInPaymentView();
+            UpdateTableInPickupView();
         }
 
         private void UpdateTableInCityView()
@@ -418,6 +554,15 @@ namespace Sinsay.ViewsModels.AdminVM
             AdminHomePage.AllPaymentMethodLV.Items.Clear();
             AdminHomePage.AllPaymentMethodLV.ItemsSource = AllPaymentMethods;
             AdminHomePage.AllPaymentMethodLV.Items.Refresh();
+        }
+
+        private void UpdateTableInPickupView()
+        {
+            AllPickupPoint = PickiupPointService.GetAllPickupPoint();
+            AdminHomePage.AllPickupPointLV.ItemsSource = null;
+            AdminHomePage.AllPickupPointLV.Items.Clear();
+            AdminHomePage.AllPickupPointLV.ItemsSource = AllPickupPoint;
+            AdminHomePage.AllPickupPointLV.Items.Refresh();
         }
 
         #endregion

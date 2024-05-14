@@ -24,6 +24,7 @@ namespace Sinsay.Views.Admin
         public static ListView AllCitiesLV;
         public static ListView AllOrderStatusLV;
         public static ListView AllPaymentMethodLV;
+        public static ListView AllPickupPointLV;
         public AdminHomePage()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace Sinsay.Views.Admin
             AllCitiesLV = ViewAllCities;
             AllOrderStatusLV = ViewAllOrderStatus;
             AllPaymentMethodLV = ViewAllPaymentMethods;
+            AllPickupPointLV = ViewAllPickupPoint;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
