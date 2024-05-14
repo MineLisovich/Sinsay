@@ -45,6 +45,7 @@ namespace Sinsay
                 if (!String.IsNullOrEmpty(tb_Email.Text) && !String.IsNullOrEmpty(tb_Password.Password))
                 {
                     AppUser user = _authService.SignIn(email: tb_Email.Text, password: tb_Password.Password);
+                    if(user.isBloced is true) { MessageBox.Show("Вход не возможен", "Ваш аккаунт заблокирован", MessageBoxButton.OK, MessageBoxImage.Warning); this.Close(); }
                     App.currentUser = user;
                     //admin
                     if (user.RoleId == 1)

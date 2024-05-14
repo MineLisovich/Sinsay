@@ -4,20 +4,18 @@ using Sinsay.Sevices.CityService;
 using Sinsay.Sevices.OrderServices;
 using Sinsay.Sevices.PaymentMethodService;
 using Sinsay.Sevices.PickiupPointService;
+using Sinsay.Sevices.UserServices;
 using Sinsay.Views.Admin;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsCityData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsOrderStatusData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsPaymentMethodData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsPickupPointData;
+using Sinsay.Views.Admin.WindowsManagerData.WindowsUserData;
 using Sinsay.Views.ResultWindow;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Sinsay.ViewsModels.AdminVM
@@ -45,6 +43,13 @@ namespace Sinsay.ViewsModels.AdminVM
         public static string NamePickupPoint { get; set; }
         public static string AddressPickupPoint { get; set; }
         public static City SelectListCityPickupPoint { get; set; }
+
+        //AppUser
+        public static AppUser SelectedAppUser { get; set; }
+        public static string UserEmail {  get; set; }
+        public static string UserName { get; set; }
+        public static string UserPhoneNumber { get; set; }
+        public static Role SelectListRolesUser { get; set; }
 
         #endregion
 
@@ -80,9 +85,22 @@ namespace Sinsay.ViewsModels.AdminVM
             get { return allPickupPoint; }
             set { allPickupPoint = value; NotifyPropertyChanged(nameof(AllPickupPoint));}
         }
+
+        //AppUser
+        private List<AppUser> allAppUsers = UserService.GetAllUsers();
+        public List<AppUser> AllAppUsers
+        {
+            get { return allAppUsers; }
+            set { allAppUsers = value; NotifyPropertyChanged(nameof(AllAppUsers)); }
+        }
+        //Roles
+        private List<Role> allRoles = UserService.GetAllRoles();
+        public List<Role> AllRoles
+        {
+            get { return allRoles; }
+            set { allRoles = value; NotifyPropertyChanged(nameof(AllRoles)); }
+        }
         #endregion
-
-
 
         #region  City (open Create/Edit window, add, edit delete)
         //open add wnd
@@ -411,10 +429,70 @@ namespace Sinsay.ViewsModels.AdminVM
         }
         #endregion
 
+        #region AppUsers
+        //open add wnd
+        private RelayCommand openAddAppUser;
+        public RelayCommand OpenAddAppUser
+        {
+            get
+            {
+                return openAddAppUser ?? new RelayCommand(obj =>
+                {
+                    OpenAddAppUserMethod();
+                });
+            }
+        }
+        private void OpenAddAppUserMethod()
+        {
+            AddUser wnd = new();
+            wnd.ShowDialog();
+        }
+        //add
+        private RelayCommand addNewAppUser;
+        public RelayCommand AddNewAppUser
+        {
+            get
+            {
+                return addNewAppUser ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+
+                    if(UserEmail is null || UserEmail.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_email");
+                    }
+                    else if (UserName is null || UserName.Replace(" ", "").Length == 0)
+                    { 
+                        ValidationsError(wnd, "tb_name");
+                    }
+                    else if(UserPhoneNumber is null || UserPhoneNumber.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_phone");
+                    }
+                    else if(SelectListRolesUser is null)
+                    {
+                        MessageBox.Show("Укажите роль");
+                    }
+                    else
+                    {
+                        result = UserService.AddUser(email: UserEmail, username: UserName, phone: UserPhoneNumber, _role: SelectListRolesUser);
+                        ShowMessageToUser(result);
+                        GlobalUpdateView();
+                        UserEmail = null;
+                        UserName = null;
+                        UserPhoneNumber = null;
+                        SelectListRolesUser = null;
+                        wnd.Close();
+                    }
+
+                });
+            }
+        }
+        #endregion
 
 
-
-        #region Edit || DELETE COMMAND
+        #region Edit && DELETE COMMAND
 
         #region EDIT OPEN WIND
         private RelayCommand openEditItem;
@@ -521,6 +599,13 @@ namespace Sinsay.ViewsModels.AdminVM
             NamePickupPoint = null;
             AddressPickupPoint = null;
             SelectListCityPickupPoint = null;
+
+
+            //AppUser
+            UserEmail = null;
+            UserName = null;
+            UserPhoneNumber = null;
+            SelectListRolesUser = null;
         }
         private void GlobalUpdateView()
         {
@@ -528,6 +613,7 @@ namespace Sinsay.ViewsModels.AdminVM
             UpdateTableInOrderStatusView();
             UpdateTableInPaymentView();
             UpdateTableInPickupView();
+            UpdateTableInAppUserView();
         }
 
         private void UpdateTableInCityView()
@@ -565,6 +651,14 @@ namespace Sinsay.ViewsModels.AdminVM
             AdminHomePage.AllPickupPointLV.Items.Refresh();
         }
 
+        private void UpdateTableInAppUserView()
+        {
+            AllAppUsers = UserService.GetAllUsers();
+            AdminHomePage.AllAppUsers.ItemsSource = null;
+            AdminHomePage.AllAppUsers.Items.Clear();
+            AdminHomePage.AllAppUsers.ItemsSource = AllAppUsers;
+            AdminHomePage.AllAppUsers.Items.Refresh();
+        }
         #endregion
         private void ShowMessageToUser (bool result)
         {

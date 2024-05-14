@@ -123,27 +123,34 @@
                 <TabItem.Header>
                     <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Управление учётными записями"/>
                 </TabItem.Header>
-
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Изменть" Command="{Binding OpenEditItem}"/>
+                        <MenuItem Header="Заблокировать" />
+                        <MenuItem Header="Разблокировать" />
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="1">
+                    <ListView x:Name="ViewAllAppUsers" ItemsSource="{Binding AllAppUsers}" SelectedItem="{Binding SelectedAppUser}" Grid.Row="1">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id"/>
-                                <GridViewColumn Header="Email"/>
-                                <GridViewColumn Header="Имя"/>
-                                <GridViewColumn Header="Номер телефона"/>
-                                <GridViewColumn Header="Роль"/>
-                                <GridViewColumn Header="Последнее посещение"/>
-                                <GridViewColumn Header="Заблокирован"/>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Path=Email}"/>
+                                <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding Path=UserName}"/>
+                                <GridViewColumn Header="Номер телефона" DisplayMemberBinding="{Binding Path=PhoneNumber}"/>
+                                <GridViewColumn Header="Роль" DisplayMemberBinding="{Binding Path=Role.Name}"/>
+                                <GridViewColumn Header="Последнее посещение" DisplayMemberBinding="{Binding Path=LastVisit}"/>
+                                <GridViewColumn Header="Заблокирован" DisplayMemberBinding="{Binding Path=isBloced}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAddAppUser}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
                 </Grid>
 
             </TabItem>
