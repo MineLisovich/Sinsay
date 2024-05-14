@@ -17,28 +17,28 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Email:</Label>
-                    <TextBox x:Name="tb_email" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_email" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Имя:</Label>
-                    <TextBox x:Name="tb_name" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_name" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Номер телефона:</Label>
-                    <TextBox x:Name="tb_phone" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_phone" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Роль:</Label>
-                    <ComboBox x:Name="tb_role" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></ComboBox>
+                    <ComboBox x:Name="tb_role" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></ComboBox>
                 </StackPanel>
             </StackPanel>
 

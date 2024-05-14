@@ -16,9 +16,9 @@
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Наименование:</Label>
-                    <TextBox Text="{Binding NameCity}" x:Name="tb_name" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <TextBox Text="{Binding NameCity}" x:Name="tb_name" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
