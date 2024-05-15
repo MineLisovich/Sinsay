@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sinsay.Models
 {
@@ -22,12 +23,11 @@ namespace Sinsay.Models
         public int PickupPointId { get; set; }
         public PickupPoint? PickupPoint { get; set; }
 
+        [Precision(20, 2)]
         public decimal TotalPrice { get; set; }
 
         [ForeignKey(nameof(PaymentMethod))]
         public int PaymentMethodId { get; set; }
         public PaymentMethod? PaymentMethod { get; set; }
-
-        public bool IsValid { get; set; }
     }
 }

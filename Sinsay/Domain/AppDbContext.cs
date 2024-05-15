@@ -35,7 +35,8 @@ namespace Sinsay.Domain
             modelBuilder.Entity<City>().HasData(new PD_Cities().cities);
             modelBuilder.Entity<PaymentMethod>().HasData(new PD_PaymentMethods().paymentMethods);
             modelBuilder.Entity<PickupPoint>().HasData(new PD_PickupPoints().pickupPoints);
-            modelBuilder.Entity<Clothes>().HasData(new PD_Clothes().clothes); 
+            modelBuilder.Entity<Clothes>().HasData(new PD_Clothes().clothes);
+            modelBuilder.Entity<OrderStatus>().HasData(new PD_OrderStatuses().orders);
         }
     }
 }

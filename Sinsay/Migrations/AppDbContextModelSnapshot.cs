@@ -125,7 +125,8 @@ namespace Sinsay.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
 
                     b.HasKey("Id");
 
@@ -185,9 +186,6 @@ namespace Sinsay.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsValid")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -205,7 +203,8 @@ namespace Sinsay.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(20, 2)
+                        .HasColumnType("decimal(20,2)");
 
                     b.HasKey("Id");
 
@@ -235,6 +234,28 @@ namespace Sinsay.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OrderStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Принят в обработку"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Подтверждён"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Доставляется в ПВЗ"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Готов к выдаче"
+                        });
                 });
 
             modelBuilder.Entity("Sinsay.Models.PaymentMethod", b =>
