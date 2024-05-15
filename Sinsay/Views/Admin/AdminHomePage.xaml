@@ -20,7 +20,7 @@
                 <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Matura MT Script Capitals" Width="200" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Top"  Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"  Orientation="Horizontal">
             <TextBlock FontFamily="Bahnschrift Condensed" FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
             <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
         </StackPanel>

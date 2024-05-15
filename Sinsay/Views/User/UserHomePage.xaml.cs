@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sinsay.Views.Admin.WindowsManagerData.WindowsClothesData;
+using Sinsay.Views.User.WindowsShoppingCart;
+using Sinsay.ViewsModels.UserVM.MainPage;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Sinsay.Views.User
 {
@@ -19,14 +12,31 @@ namespace Sinsay.Views.User
     /// </summary>
     public partial class UserHomePage : Window
     {
+        public static ListView AllClothes;
         public UserHomePage()
         {
             InitializeComponent();
+            DataContext = new MainPageDataManagerVM();
+            AllClothes = ViewAllClothesUserArea;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             TbUserName.Text = $"Привет, {App.currentUser.UserName}";
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow wnd = new MainWindow();
+            wnd.Show();
+            this.Close();
+        }
+
+        private void shoppingCart_Click(object sender, RoutedEventArgs e)
+        {
+            ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+            shoppingCartPage.Show();
+            this.Close();
         }
     }
 }
