@@ -38,5 +38,24 @@ namespace Sinsay.Sevices.ShoppingCartService
                 return false;
             }
         }
+
+        public static bool DeleteShoppingCartItem(int clothesId)
+        {
+            using (AppDbContext db = new())
+            {
+                ShoppingCart? item = db.ShoppingCarts.FirstOrDefault(x => x.ClothersId == clothesId);
+                if (item is null) { return false;  }
+                try
+                {
+                    db.ShoppingCarts.Remove(item);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

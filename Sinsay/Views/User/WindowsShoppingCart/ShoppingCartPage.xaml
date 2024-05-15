@@ -40,8 +40,8 @@
         <!--CREATE ORDER-->
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
             <TextBlock Text="Итого: "  FontFamily="Bahnschrift Condensed" FontSize="16"></TextBlock>
-            <TextBlock x:Name="TotalPrice" Text="{Binding TotalPrice}" FontFamily="Bahnschrift Condensed" FontSize="16"></TextBlock>
-            <Button Content="Оформить заказ"    FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
+            <TextBlock x:Name="TotalPrice" Text="{Binding TotalPrice}" FontFamily="Bahnschrift Condensed" FontSize="18"></TextBlock>
+            <Button Content="Оформить заказ" Command="{Binding OpenCreateOrder}" FontFamily="Bahnschrift Condensed" FontSize="18" Margin="5,0,0,0"></Button>
         </StackPanel>
         <!--END CREATE ORDER-->
 
