@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Sinsay.Sevices.UserServices
 {
@@ -50,10 +51,10 @@ namespace Sinsay.Sevices.UserServices
                  bool userExist = db.Users.Any(x => x.Email ==email);
                  if(userExist is true) { return false; }
 
-                string tempPassword = Guid.NewGuid().ToString();
+                    string tempPassword = Guid.NewGuid().ToString("N").Substring(0, 10); // Получите первые 10 символов из GUID
 
 
-                AppUser user = new()
+                    AppUser user = new()
                 {
                     Email = email,
                     UserName = username,
@@ -67,7 +68,9 @@ namespace Sinsay.Sevices.UserServices
                     db.Users.Add(user);
                     db.SaveChanges();
 
-                    //Потом выслать временный пароль на почту
+                    SendEmailService send = new();
+                    send.SendEmailAsync(email:email, subject:"Аккаунт создан", message: "Пароль для входа: " + tempPassword);
+
                     return true;
               }
             }
@@ -97,12 +100,17 @@ namespace Sinsay.Sevices.UserServices
             using (AppDbContext db = new())
             {
                AppUser? user = db.Users.FirstOrDefault(x=>x.Id == id);
+                string userEmail = user.Email;
                if(user is null) { return false; }
                if (user.Email == emailCurrUser) { return false; }
                 try
                 {
                     db.Users.Remove(user);
                     db.SaveChanges();
+
+                    SendEmailService send = new();
+                    send.SendEmailAsync(email: userEmail, subject: "Аккаунт удалён", message: "Ваш аккаунт был удалён администратором");
+
                     return true;
                 }
                 catch { return false; }
@@ -122,10 +130,14 @@ namespace Sinsay.Sevices.UserServices
                     if(isblock is true)
                     {
                         user.isBloced = true;
+                        SendEmailService send = new();
+                        send.SendEmailAsync(email: user.Email, subject: "Аккаунт заблокирован", message: "Ваш аккаунт был заблокирован");
                     }
                     else
                     {
                         user.isBloced = false;
+                        SendEmailService send = new();
+                        send.SendEmailAsync(email: user.Email, subject: "Аккаунт разблокирован", message: "Ваш аккаунт был разблокироан");
                     }
                     db.SaveChanges();
                     return true;
