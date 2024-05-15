@@ -26,6 +26,7 @@ namespace Sinsay.Views.Admin
         public static ListView AllPaymentMethodLV;
         public static ListView AllPickupPointLV;
         public static ListView AllAppUsers;
+        public static ListView AllClothes;
         public AdminHomePage()
         {
             InitializeComponent();
@@ -35,11 +36,17 @@ namespace Sinsay.Views.Admin
             AllPaymentMethodLV = ViewAllPaymentMethods;
             AllPickupPointLV = ViewAllPickupPoint;
             AllAppUsers = ViewAllAppUsers;
+            AllClothes = ViewAllClothes;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             TbUserName.Text = $"Привет, {App.currentUser.UserName}";
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

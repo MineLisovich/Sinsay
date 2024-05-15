@@ -12,8 +12,8 @@ using Sinsay.Domain;
 namespace Sinsay.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240513074836_mig1")]
-    partial class mig1
+    [Migration("20240515084544_dd")]
+    partial class dd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,12 +123,6 @@ namespace Sinsay.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsVisible")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -146,7 +140,6 @@ namespace Sinsay.Migrations
                             Id = 1,
                             Count = 100,
                             Description = "Шляпа модная",
-                            IsVisible = true,
                             Name = "Шляпа",
                             Price = 134.34m
                         },
@@ -155,7 +148,6 @@ namespace Sinsay.Migrations
                             Id = 2,
                             Count = 100,
                             Description = "Штаны дьявола",
-                            IsVisible = true,
                             Name = "Штаны",
                             Price = 666.66m
                         },
@@ -164,7 +156,6 @@ namespace Sinsay.Migrations
                             Id = 3,
                             Count = 100,
                             Description = "Майка алкаша",
-                            IsVisible = true,
                             Name = "Майка",
                             Price = 99.00m
                         },
@@ -173,7 +164,6 @@ namespace Sinsay.Migrations
                             Id = 4,
                             Count = 100,
                             Description = "Шлёпки ковбойские",
-                            IsVisible = true,
                             Name = "Шлёпки",
                             Price = 664.34m
                         },
@@ -182,7 +172,6 @@ namespace Sinsay.Migrations
                             Id = 5,
                             Count = 100,
                             Description = "Кепарик чёткий",
-                            IsVisible = true,
                             Name = "Кепарик",
                             Price = 34.34m
                         });

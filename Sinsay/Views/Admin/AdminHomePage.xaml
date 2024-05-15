@@ -22,7 +22,7 @@
         </StackPanel>
         <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Top"  Orientation="Horizontal">
             <TextBlock FontFamily="Bahnschrift Condensed" FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
-            <Button x:Name="LogOut" Content="Выйти"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
         </StackPanel>
         <!--END HEADER-->
         <TabControl Grid.Row="1" SelectedItem="{Binding SelectedTab}">
@@ -31,25 +31,33 @@
                 <TabItem.Header>
                     <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Товары"/>
                 </TabItem.Header>
-
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Изменть" Command="{Binding OpenEditItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="1">
+                    <ListView Grid.Row="1" x:Name="ViewAllClothes" ItemsSource="{Binding AllClothes}" SelectedItem="{Binding SelectedClothes}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id"/>
-                                <GridViewColumn Header="Наименование товара"/>
-                                <GridViewColumn Header="Описание"/>
-                                <GridViewColumn Header="Количество на складе"/>
-                                <GridViewColumn Header="Цена"/>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Наименование товара" DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Path=Description}"/>
+                                <GridViewColumn Header="Количество на складе" DisplayMemberBinding="{Binding Path=Count}"/>
+                                <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Path=Price}"/>
                             </GridView>
+                            
                         </ListView.View>
+                       
                     </ListView>
-                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                   
+                    <Button Grid.Row="2" Content="Добавить" Command="{Binding OpenAddClothes}" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
                 </Grid>
             </TabItem>
             <!--END Товары-->
@@ -98,7 +106,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <ListView Grid.Row="1">
                         <ListView.View>
@@ -114,7 +121,6 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
                 </Grid>
             </TabItem>
             <!--END Модерация заказов-->

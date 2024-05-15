@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Sinsay.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class dd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,9 +35,7 @@ namespace Sinsay.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsVisible = table.Column<bool>(type: "bit", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -206,14 +204,14 @@ namespace Sinsay.Migrations
 
             migrationBuilder.InsertData(
                 table: "Clothes",
-                columns: new[] { "Id", "Count", "Description", "Image", "IsVisible", "Name", "Price" },
+                columns: new[] { "Id", "Count", "Description", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, 100, "Шляпа модная", null, true, "Шляпа", 134.34m },
-                    { 2, 100, "Штаны дьявола", null, true, "Штаны", 666.66m },
-                    { 3, 100, "Майка алкаша", null, true, "Майка", 99.00m },
-                    { 4, 100, "Шлёпки ковбойские", null, true, "Шлёпки", 664.34m },
-                    { 5, 100, "Кепарик чёткий", null, true, "Кепарик", 34.34m }
+                    { 1, 100, "Шляпа модная", "Шляпа", 134.34m },
+                    { 2, 100, "Штаны дьявола", "Штаны", 666.66m },
+                    { 3, 100, "Майка алкаша", "Майка", 99.00m },
+                    { 4, 100, "Шлёпки ковбойские", "Шлёпки", 664.34m },
+                    { 5, 100, "Кепарик чёткий", "Кепарик", 34.34m }
                 });
 
             migrationBuilder.InsertData(

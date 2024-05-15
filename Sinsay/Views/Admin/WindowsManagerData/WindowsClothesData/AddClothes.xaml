@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sinsay.Views.Admin.WindowsManagerData.WindowsClothesData"
         mc:Ignorable="d"
-        Title="Sinsay - Добавить товар" Height="400" Width="400"
- WindowStartupLocation="CenterScreen">
+        Title="Sinsay - Добавить товар" Height="420" Width="400"
+        WindowStartupLocation="CenterScreen"
+         Name="AddClothesWND">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
@@ -17,40 +18,33 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Наименование:</Label>
-                    <TextBox x:Name="tb_name" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_name" Text="{Binding ClothesName}" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Описание:</Label>
-                    <TextBox x:Name="tb_description" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_description" Text="{Binding ClothesDescription}" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
             
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Количество:</Label>
-                    <TextBox x:Name="tb_count" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_count" Text="{Binding ClothesCount}" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Цена:</Label>
-                    <TextBox x:Name="tb_price" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Видимость:</Label>
-                    <CheckBox x:Name="tb_visible"  FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,8,0,0" RenderTransformOrigin="0.469,0.79" IsChecked="False"/>
+                    <TextBox x:Name="tb_price" Text="{Binding ClothesPrice}" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 0">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button x:Name="LogIn" Content="Добавить"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="22"></Button>
+                    <Button Command="{Binding AddClothes}" CommandParameter="{Binding ElementName=AddClothesWND}" Content="Добавить"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="22"></Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

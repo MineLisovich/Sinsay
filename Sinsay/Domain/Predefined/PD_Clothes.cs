@@ -16,8 +16,6 @@ namespace Sinsay.Domain.Predefined
             Description = "Шляпа модная",
             Count = 100,
             Price = 134.34m,
-            IsVisible = true,
-            Image = null
         };
         Clothes clothes2 = new()
         {
@@ -26,8 +24,6 @@ namespace Sinsay.Domain.Predefined
             Description = "Штаны дьявола",
             Count = 100,
             Price = 666.66m,
-            IsVisible = true,
-            Image = null
         };
         Clothes clothes3 = new()
         {
@@ -36,8 +32,6 @@ namespace Sinsay.Domain.Predefined
             Description = "Майка алкаша",
             Count = 100,
             Price = 99.00m,
-            IsVisible = true,
-            Image = null
         };
         Clothes clothes4 = new()
         {
@@ -46,8 +40,6 @@ namespace Sinsay.Domain.Predefined
             Description = "Шлёпки ковбойские",
             Count = 100,
             Price = 664.34m,
-            IsVisible = true,
-            Image = null
         };
         Clothes clothes5 = new()
         {
@@ -56,8 +48,6 @@ namespace Sinsay.Domain.Predefined
             Description = "Кепарик чёткий",
             Count = 100,
             Price = 34.34m,
-            IsVisible = true,
-            Image = null
         };
 
         public readonly List<Clothes> clothes;  

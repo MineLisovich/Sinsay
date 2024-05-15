@@ -1,12 +1,14 @@
 ﻿using Sinsay.Models;
 using Sinsay.Sevices;
 using Sinsay.Sevices.CityService;
+using Sinsay.Sevices.ClothesService;
 using Sinsay.Sevices.OrderServices;
 using Sinsay.Sevices.PaymentMethodService;
 using Sinsay.Sevices.PickiupPointService;
 using Sinsay.Sevices.UserServices;
 using Sinsay.Views.Admin;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsCityData;
+using Sinsay.Views.Admin.WindowsManagerData.WindowsClothesData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsOrderStatusData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsPaymentMethodData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsPickupPointData;
@@ -50,6 +52,14 @@ namespace Sinsay.ViewsModels.AdminVM
         public static string UserName { get; set; }
         public static string UserPhoneNumber { get; set; }
         public static Role SelectListRolesUser { get; set; }
+
+        //Clothes
+        public static Clothes SelectedClothes { get; set; }
+        public static string ClothesName { get; set; }
+        public static string ClothesDescription { get; set; }
+        public static int ClothesCount { get; set; }
+        public static decimal ClothesPrice { get; set; }
+
 
         #endregion
 
@@ -99,6 +109,14 @@ namespace Sinsay.ViewsModels.AdminVM
         {
             get { return allRoles; }
             set { allRoles = value; NotifyPropertyChanged(nameof(AllRoles)); }
+        }
+
+        //Clothes
+        private List<Clothes> allClothes = ClothesService.GetAllClothes();
+        public List<Clothes> AllClothes
+        {
+            get { return allClothes; }
+            set { allClothes = value; NotifyPropertyChanged(nameof(AllClothes)); }
         }
         #endregion
 
@@ -581,6 +599,118 @@ namespace Sinsay.ViewsModels.AdminVM
         }
         #endregion
 
+        #region Clothes
+        //open add wnd
+        private RelayCommand openAddClothes;
+        public RelayCommand OpenAddClothes
+        {
+            get
+            {
+                return openAddClothes ?? new RelayCommand(obj =>
+                {
+                    OpenAddClothesMethod();
+                });
+            }
+        }
+        private void OpenAddClothesMethod()
+        {
+            AddClothes wnd = new();
+            wnd.ShowDialog();
+        }
+
+        //add
+        private RelayCommand addClothes;
+        public RelayCommand AddClothes
+        {
+            get
+            {
+                return addClothes ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+
+                    if (ClothesName is null || ClothesName.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_name");
+                    }
+                    else if (ClothesDescription is null || ClothesDescription.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_description");
+                    }
+                    else if (ClothesCount <= 0)
+                    {
+                        ValidationsError(wnd, "tb_count");
+                    }
+                    else if (ClothesPrice <= 0)
+                    {
+                        ValidationsError(wnd, "tb_price");
+                    }
+                    else
+                    {
+                        result = ClothesService.AddClothes(name: ClothesName, descr: ClothesDescription, count: ClothesCount, price: ClothesPrice);
+                        ShowMessageToUser(result);
+                        GlobalUpdateView();
+                        ClothesName = null;
+                        ClothesDescription = null;
+                        ClothesCount = 0;
+                        ClothesPrice = 0m;
+                        wnd.Close();
+                    }
+                });
+            }
+        }
+
+        //edit
+        private RelayCommand editClothes;
+        public RelayCommand EditClothes
+        {
+            get 
+            {
+                return editClothes ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+                    if(SelectedClothes is not null)
+                    {
+                        if (ClothesName is null || ClothesName.Replace(" ", "").Length == 0)
+                        {
+                            ValidationsError(wnd, "tb_name");
+                        }
+                        else if (ClothesDescription is null || ClothesDescription.Replace(" ", "").Length == 0)
+                        {
+                            ValidationsError(wnd, "tb_description");
+                        }
+                        else if (ClothesCount <= 0)
+                        {
+                            ValidationsError(wnd, "tb_count");
+                        }
+                        else if (ClothesPrice <= 0)
+                        {
+                            ValidationsError(wnd, "tb_price");
+                        }
+                        else
+                        {
+                            result = ClothesService.EditClothes(clothes: SelectedClothes, name: ClothesName, descr: ClothesDescription, count: ClothesCount, price: ClothesPrice);
+                            ShowMessageToUser(result);
+                            GlobalUpdateView();
+                            ClothesName = null;
+                            ClothesDescription = null;
+                            ClothesCount = 0;
+                            ClothesPrice = 0m;
+                            wnd.Close();
+                        }
+                    }
+                    
+                });
+            }
+        }
+
+        private void OpenEditClothesMethod(Clothes clothes)
+        {
+            EditClothes wnd = new EditClothes(clothes);
+            wnd.ShowDialog();
+        }
+        #endregion
 
         #region Edit && DELETE COMMAND
 
@@ -617,6 +747,11 @@ namespace Sinsay.ViewsModels.AdminVM
                     if (SelectedTab.Name == "UsersTab" && SelectedAppUser is not null)
                     {
                         OpenEditAppUserMethod(SelectedAppUser);
+                    }
+                    //Clothes
+                    if (SelectedTab.Name == "ClothesTab" && SelectedClothes is not null)
+                    {
+                        OpenEditClothesMethod(SelectedClothes);
                     }
                 });
             }
@@ -660,6 +795,11 @@ namespace Sinsay.ViewsModels.AdminVM
                     if (SelectedTab.Name == "UsersTab" && SelectedAppUser is not null)
                     {
                         result = UserService.DeleteUser(id:SelectedAppUser.Id, emailCurrUser:App.currentUser.Email);
+                    }
+                    //Clothes
+                    if (SelectedTab.Name == "ClothesTab" && SelectedClothes is not null)
+                    {
+                       result = ClothesService.DeleteClothes(SelectedClothes.Id);
                     }
                     GlobalUpdateView();
                     GlobalNullValueProp();
@@ -706,6 +846,12 @@ namespace Sinsay.ViewsModels.AdminVM
             UserName = null;
             UserPhoneNumber = null;
             SelectListRolesUser = null;
+
+            //Clothes
+            ClothesName = null;
+            ClothesDescription = null;
+            ClothesCount = 0;
+            ClothesPrice = 0m;
         }
         private void GlobalUpdateView()
         {
@@ -714,6 +860,7 @@ namespace Sinsay.ViewsModels.AdminVM
             UpdateTableInPaymentView();
             UpdateTableInPickupView();
             UpdateTableInAppUserView();
+            UpdateTableInClothesView();
         }
 
         private void UpdateTableInCityView()
@@ -758,6 +905,14 @@ namespace Sinsay.ViewsModels.AdminVM
             AdminHomePage.AllAppUsers.Items.Clear();
             AdminHomePage.AllAppUsers.ItemsSource = AllAppUsers;
             AdminHomePage.AllAppUsers.Items.Refresh();
+        }
+        private void UpdateTableInClothesView()
+        {
+            AllClothes = ClothesService.GetAllClothes();
+            AdminHomePage.AllClothes.ItemsSource = null;
+            AdminHomePage.AllClothes.Items.Clear();
+            AdminHomePage.AllClothes.ItemsSource = AllClothes;
+            AdminHomePage.AllClothes.Items.Refresh();
         }
         #endregion
         private void ShowMessageToUser(bool result)
