@@ -35,7 +35,7 @@ namespace Sinsay.Views.Account
         {
             try
             {
-                if (!String.IsNullOrEmpty(tb_Email.Text) && !String.IsNullOrEmpty(tb_Password.Password) && !String.IsNullOrEmpty(tb_UserName.Text))
+                if (!String.IsNullOrEmpty(tb_Email.Text) && !String.IsNullOrEmpty(tb_Password.Password) && !String.IsNullOrEmpty(tb_UserName.Text) && !String.IsNullOrEmpty(tb_PhoneNumber.Text))
                 {
                    
                     AppUser user = _authService.Register(email: tb_Email.Text, userName: tb_UserName.Text, password: tb_Password.Password, phoneNumber: tb_PhoneNumber.Text);

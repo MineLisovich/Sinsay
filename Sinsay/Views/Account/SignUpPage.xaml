@@ -21,28 +21,28 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Email* :</Label>
-                    <TextBox x:Name="tb_Email" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="21,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_Email" Width="250" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="21,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Имя* :</Label>
-                    <TextBox x:Name="tb_UserName" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="31,0,0,0"></TextBox>
+                    <TextBox x:Name="tb_UserName" Width="250" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="31,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                     <Label FontFamily="Bahnschrift Condensed" FontSize="18">Пароль* :</Label>
-                    <PasswordBox x:Name="tb_Password" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Password="" Margin="11,0,0,0"></PasswordBox>
+                    <PasswordBox x:Name="tb_Password" Width="250" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Password="" Margin="11,0,0,0"></PasswordBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Телефон :</Label>
-                    <TextBox x:Name="tb_PhoneNumber" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Телефон* :</Label>
+                    <TextBox x:Name="tb_PhoneNumber" Width="250" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
 
