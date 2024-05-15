@@ -126,8 +126,8 @@
                 <TabItem.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Изменть" Command="{Binding OpenEditItem}"/>
-                        <MenuItem Header="Заблокировать" />
-                        <MenuItem Header="Разблокировать" />
+                        <MenuItem Header="Заблокировать" Command="{Binding BlockUser}"/>
+                        <MenuItem Header="Разблокировать"  Command="{Binding UnBlockUser}"/>
                         <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
                     </ContextMenu>
                 </TabItem.ContextMenu>

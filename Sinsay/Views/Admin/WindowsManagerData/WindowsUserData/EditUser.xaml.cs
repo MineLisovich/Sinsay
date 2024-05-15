@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sinsay.Models;
+using Sinsay.ViewsModels.AdminVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,14 @@ namespace Sinsay.Views.Admin.WindowsManagerData.WindowsUserData
     /// </summary>
     public partial class EditUser : Window
     {
-        public EditUser()
+        public EditUser(AppUser user)
         {
             InitializeComponent();
+            DataContext = new AdminDataManagerVM();
+            AdminDataManagerVM.UserEmail = user.Email;
+            AdminDataManagerVM.UserName = user.UserName;
+            AdminDataManagerVM.UserPhoneNumber = user.PhoneNumber;
+            AdminDataManagerVM.SelectListRolesUser = user.Role;
         }
     }
 }

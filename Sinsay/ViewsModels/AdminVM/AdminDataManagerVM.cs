@@ -46,7 +46,7 @@ namespace Sinsay.ViewsModels.AdminVM
 
         //AppUser
         public static AppUser SelectedAppUser { get; set; }
-        public static string UserEmail {  get; set; }
+        public static string UserEmail { get; set; }
         public static string UserName { get; set; }
         public static string UserPhoneNumber { get; set; }
         public static Role SelectListRolesUser { get; set; }
@@ -83,7 +83,7 @@ namespace Sinsay.ViewsModels.AdminVM
         public List<PickupPoint> AllPickupPoint
         {
             get { return allPickupPoint; }
-            set { allPickupPoint = value; NotifyPropertyChanged(nameof(AllPickupPoint));}
+            set { allPickupPoint = value; NotifyPropertyChanged(nameof(AllPickupPoint)); }
         }
 
         //AppUser
@@ -109,7 +109,7 @@ namespace Sinsay.ViewsModels.AdminVM
         {
             get
             {
-                return openAddCityWnd ?? new RelayCommand( obj =>
+                return openAddCityWnd ?? new RelayCommand(obj =>
                 {
                     OpenAddCityMethod();
                 });
@@ -141,7 +141,7 @@ namespace Sinsay.ViewsModels.AdminVM
                         GlobalUpdateView();
                         NameCity = null;
                         wnd.Close();
-                    }                  
+                    }
                 });
             }
         }
@@ -155,7 +155,7 @@ namespace Sinsay.ViewsModels.AdminVM
                 {
                     Window wnd = obj as Window;
                     bool result = false;
-                    if(SelectedCity is not null && NameCity is not null)
+                    if (SelectedCity is not null && NameCity is not null)
                     {
                         result = CityService.EditCity(SelectedCity, NameCity);
                         ShowMessageToUser(result);
@@ -227,11 +227,11 @@ namespace Sinsay.ViewsModels.AdminVM
         {
             get
             {
-                return editOrderStatus ?? new RelayCommand(obj => 
+                return editOrderStatus ?? new RelayCommand(obj =>
                 {
                     Window wnd = obj as Window;
                     bool result = false;
-                    if(SelectedOrderStatus is not null && NameOrderStatus is not null || NameOrderStatus.Replace(" ", "").Length != 0)
+                    if (SelectedOrderStatus is not null && NameOrderStatus is not null || NameOrderStatus.Replace(" ", "").Length != 0)
                     {
                         result = OrderStatusService.EditOrderStatus(SelectedOrderStatus, NameOrderStatus);
                         ShowMessageToUser(result);
@@ -270,7 +270,7 @@ namespace Sinsay.ViewsModels.AdminVM
         private void OpenAddPaymentMethodMet()
         {
             AddPaymentMethod wnd = new();
-            wnd.ShowDialog();   
+            wnd.ShowDialog();
         }
 
         //add
@@ -304,7 +304,8 @@ namespace Sinsay.ViewsModels.AdminVM
         {
             get
             {
-                return editPaymentMethod ?? new RelayCommand(obj => {
+                return editPaymentMethod ?? new RelayCommand(obj =>
+                {
                     Window wnd = obj as Window;
                     bool result = false;
                     if (SelectedPaymentMethod is not null && NamePaymentMethod is not null || NamePaymentMethod.Replace(" ", "").Length != 0)
@@ -322,7 +323,7 @@ namespace Sinsay.ViewsModels.AdminVM
                 });
             }
         }
-        private void OpenEditPaymentMethod (PaymentMethod paymentMethod)
+        private void OpenEditPaymentMethod(PaymentMethod paymentMethod)
         {
             EditPaymentMethod wnd = new(paymentMethod);
             wnd.ShowDialog();
@@ -366,7 +367,7 @@ namespace Sinsay.ViewsModels.AdminVM
                     {
                         ValidationsError(wnd, "tb_address");
                     }
-                    else if(SelectListCityPickupPoint is null)
+                    else if (SelectListCityPickupPoint is null)
                     {
                         MessageBox.Show("Укажите город");
                     }
@@ -394,7 +395,7 @@ namespace Sinsay.ViewsModels.AdminVM
                 {
                     Window wnd = obj as Window;
                     bool result = false;
-                    if(SelectedPickupPoint is not null)
+                    if (SelectedPickupPoint is not null)
                     {
                         if (NamePickupPoint is null || NamePickupPoint.Replace(" ", "").Length == 0)
                         {
@@ -410,7 +411,7 @@ namespace Sinsay.ViewsModels.AdminVM
                         }
                         else
                         {
-                            result = PickiupPointService.EditPickupPoint(pickupPoint:SelectedPickupPoint,name: NamePickupPoint, address: AddressPickupPoint, _city: SelectListCityPickupPoint);
+                            result = PickiupPointService.EditPickupPoint(pickupPoint: SelectedPickupPoint, name: NamePickupPoint, address: AddressPickupPoint, _city: SelectListCityPickupPoint);
                             ShowMessageToUser(result);
                             GlobalUpdateView();
                             NamePickupPoint = null;
@@ -458,19 +459,19 @@ namespace Sinsay.ViewsModels.AdminVM
                     Window wnd = obj as Window;
                     bool result = false;
 
-                    if(UserEmail is null || UserEmail.Replace(" ", "").Length == 0)
+                    if (UserEmail is null || UserEmail.Replace(" ", "").Length == 0)
                     {
                         ValidationsError(wnd, "tb_email");
                     }
                     else if (UserName is null || UserName.Replace(" ", "").Length == 0)
-                    { 
+                    {
                         ValidationsError(wnd, "tb_name");
                     }
-                    else if(UserPhoneNumber is null || UserPhoneNumber.Replace(" ", "").Length == 0)
+                    else if (UserPhoneNumber is null || UserPhoneNumber.Replace(" ", "").Length == 0)
                     {
                         ValidationsError(wnd, "tb_phone");
                     }
-                    else if(SelectListRolesUser is null)
+                    else if (SelectListRolesUser is null)
                     {
                         MessageBox.Show("Укажите роль");
                     }
@@ -486,6 +487,95 @@ namespace Sinsay.ViewsModels.AdminVM
                         wnd.Close();
                     }
 
+                });
+            }
+        }
+        //Edit
+        private RelayCommand editAppUser;
+        public RelayCommand EditAppUser
+        {
+            get
+            {
+                return editAppUser ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+                    if (SelectedAppUser is not null)
+                    {
+                        if (UserEmail is null || UserEmail.Replace(" ", "").Length == 0)
+                        {
+                            ValidationsError(wnd, "tb_email");
+                        }
+                        else if (UserName is null || UserName.Replace(" ", "").Length == 0)
+                        {
+                            ValidationsError(wnd, "tb_name");
+                        }
+                        else if (UserPhoneNumber is null || UserPhoneNumber.Replace(" ", "").Length == 0)
+                        {
+                            ValidationsError(wnd, "tb_phone");
+                        }
+                        else if (SelectListRolesUser is null)
+                        {
+                            MessageBox.Show("Укажите роль");
+                        }
+                        else
+                        {
+                            result = UserService.EditUser(user: SelectedAppUser, email: UserEmail, username: UserName, phone: UserPhoneNumber, _role: SelectListRolesUser, emailCurrUser: App.currentUser.Email);
+                            ShowMessageToUser(result);
+                            GlobalUpdateView();
+                            UserEmail = null;
+                            UserName = null;
+                            UserPhoneNumber = null;
+                            SelectListRolesUser = null;
+                            wnd.Close();
+                        }
+                    }
+                });
+            }
+        }
+        private void OpenEditAppUserMethod(AppUser user)
+        {
+            EditUser wnd = new(user);
+            wnd.ShowDialog();
+        }
+
+        //BlockUser
+        private RelayCommand blockUser;
+        public RelayCommand BlockUser
+        {
+            get
+            {
+                return blockUser ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+                    
+                    if (SelectedTab.Name == "UsersTab" && SelectedAppUser is not null)
+                    {
+                        result = UserService.BlockUnBlockUser(id:SelectedAppUser.Id,emailCurrUser:App.currentUser.Email, isblock:true);
+                        //ShowMessageToUser(result);
+                        GlobalUpdateView();
+                    }
+                });
+            }
+        }
+        //UnBlockUser
+        private RelayCommand unBlockUser;
+        public RelayCommand UnBlockUser
+        {
+            get
+            {
+                return unBlockUser ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+
+                    if (SelectedTab.Name == "UsersTab" && SelectedAppUser is not null)
+                    {
+                        result = UserService.BlockUnBlockUser(id: SelectedAppUser.Id, emailCurrUser: App.currentUser.Email, isblock: false);
+                        //ShowMessageToUser(result);
+                        GlobalUpdateView();
+                    }
                 });
             }
         }
@@ -523,11 +613,16 @@ namespace Sinsay.ViewsModels.AdminVM
                     {
                         OpenEditPickupPointMethod(SelectedPickupPoint);
                     }
+                    //AppUser
+                    if (SelectedTab.Name == "UsersTab" && SelectedAppUser is not null)
+                    {
+                        OpenEditAppUserMethod(SelectedAppUser);
+                    }
                 });
             }
         }
 
-       
+
         #endregion
 
         #region DELETE
@@ -542,28 +637,33 @@ namespace Sinsay.ViewsModels.AdminVM
                     //City
                     if (SelectedTab.Name == "CityTab" && SelectedCity is not null)
                     {
-                         result = CityService.DeleteCity(SelectedCity.Id);
-                        
+                        result = CityService.DeleteCity(SelectedCity.Id);
+
                     }
 
                     //OrderStatus
                     if (SelectedTab.Name == "OrderStatusTab" && SelectedOrderStatus is not null)
                     {
-                      result = OrderStatusService.DeleteOrderStatus(SelectedOrderStatus.Id);
+                        result = OrderStatusService.DeleteOrderStatus(SelectedOrderStatus.Id);
                     }
                     //Payment
                     if (SelectedTab.Name == "PaymentMethodsTab" && SelectedPaymentMethod is not null)
                     {
-                       result = PaymentMethodService.DeletePaymentMethod(SelectedPaymentMethod.Id);
+                        result = PaymentMethodService.DeletePaymentMethod(SelectedPaymentMethod.Id);
                     }
                     //PickupPoint
                     if (SelectedTab.Name == "PickupTab" && SelectedPickupPoint is not null)
                     {
                         result = PickiupPointService.DeletePickupPoint(SelectedPickupPoint.Id);
                     }
+                    //AppUser
+                    if (SelectedTab.Name == "UsersTab" && SelectedAppUser is not null)
+                    {
+                        result = UserService.DeleteUser(id:SelectedAppUser.Id, emailCurrUser:App.currentUser.Email);
+                    }
                     GlobalUpdateView();
                     GlobalNullValueProp();
-                   //ShowMessageToUser(result);
+                    //ShowMessageToUser(result);
                 });
             }
         }
@@ -581,8 +681,8 @@ namespace Sinsay.ViewsModels.AdminVM
         private void GlobalNullValueProp()
         {
             //Global
-           
-            
+
+
             //City
             NameCity = null;
             SelectedCity = null;
@@ -660,9 +760,9 @@ namespace Sinsay.ViewsModels.AdminVM
             AdminHomePage.AllAppUsers.Items.Refresh();
         }
         #endregion
-        private void ShowMessageToUser (bool result)
+        private void ShowMessageToUser(bool result)
         {
-            
+
             if (result is true)
             {
                 MessageView msView = new("Успех");
@@ -674,17 +774,17 @@ namespace Sinsay.ViewsModels.AdminVM
                 OpenWindowCS(msView);
             }
         }
-        private void ValidationsError (Window wnd, string blockName)
+        private void ValidationsError(Window wnd, string blockName)
         {
             Control block = wnd.FindName(blockName) as Control;
             block.BorderBrush = Brushes.Red;
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged (String propName)
+        private void NotifyPropertyChanged(String propName)
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged (this, new PropertyChangedEventArgs (propName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
     }
