@@ -1,6 +1,4 @@
-﻿
-
-using Sinsay.Models;
+﻿using Sinsay.Models;
 
 namespace Sinsay.Domain.Predefined
 {

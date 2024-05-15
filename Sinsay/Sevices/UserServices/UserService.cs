@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sinsay.Domain;
 using Sinsay.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Sinsay.Sevices.UserServices
 {

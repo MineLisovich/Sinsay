@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sinsay.Domain;
 using Sinsay.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sinsay.Sevices.AuthService
 {
