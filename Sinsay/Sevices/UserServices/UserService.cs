@@ -30,6 +30,16 @@ namespace Sinsay.Sevices.UserServices
             }
         }
 
+        public static List<AppUser> SearchUserList(string search)
+        {
+            using (AppDbContext db = new())
+            {
+
+                List<AppUser> users = db.Users.Include(x => x.Role).Where(x => x.Email.Contains(search)).ToList();
+                return users;
+            }
+        }
+
         public static bool AddUser(string email, string username, string phone, Role _role)
         {
             

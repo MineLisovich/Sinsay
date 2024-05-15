@@ -22,6 +22,15 @@ namespace Sinsay.Sevices.CityService
              
         }
 
+        public static List<City> SearchCityList(string search)
+        {
+            using (AppDbContext db = new())
+            {
+                
+                    List<City> cities = db.Citys.Where(x => x.Name.Contains(search)).ToList();
+                    return cities;
+            }
+        }
         public static bool AddCity(string name)
         {
             try

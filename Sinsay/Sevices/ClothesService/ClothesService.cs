@@ -19,6 +19,16 @@ namespace Sinsay.Sevices.ClothesService
             }
         }
 
+        public static List<Clothes> SearchClothesList(string search)
+        {
+            using (AppDbContext db = new())
+            {
+
+                List<Clothes> clothes = db.Clothes.Where(x => x.Name.Contains(search)).ToList();
+                return clothes;
+            }
+        }
+
         public static bool AddClothes(string name, string descr, int count, decimal price)
         {
             try

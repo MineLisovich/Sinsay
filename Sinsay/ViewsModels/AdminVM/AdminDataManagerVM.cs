@@ -31,6 +31,7 @@ namespace Sinsay.ViewsModels.AdminVM
         //City
         public static City SelectedCity { get; set; }
         public static string NameCity { get; set; }
+        public string SearchCity { get; set; }
 
         //OrderStatus
         public static OrderStatus SelectedOrderStatus { get; set; }
@@ -45,6 +46,7 @@ namespace Sinsay.ViewsModels.AdminVM
         public static string NamePickupPoint { get; set; }
         public static string AddressPickupPoint { get; set; }
         public static City SelectListCityPickupPoint { get; set; }
+        public static string SearchPickup { get; set; }
 
         //AppUser
         public static AppUser SelectedAppUser { get; set; }
@@ -52,6 +54,7 @@ namespace Sinsay.ViewsModels.AdminVM
         public static string UserName { get; set; }
         public static string UserPhoneNumber { get; set; }
         public static Role SelectListRolesUser { get; set; }
+        public static string SearchUser {  get; set; }
 
         //Clothes
         public static Clothes SelectedClothes { get; set; }
@@ -59,6 +62,7 @@ namespace Sinsay.ViewsModels.AdminVM
         public static string ClothesDescription { get; set; }
         public static int ClothesCount { get; set; }
         public static decimal ClothesPrice { get; set; }
+        public static string SearchClothes { get; set; }
 
 
         #endregion
@@ -192,6 +196,40 @@ namespace Sinsay.ViewsModels.AdminVM
         {
             EditCity winEditCity = new(city);
             winEditCity.ShowDialog();
+        }
+
+        //searh
+        private RelayCommand searchCity;
+        public RelayCommand SearchCityCom
+        {
+            get
+            {
+                return searchCity ?? new RelayCommand(obj =>
+                {
+                    AllCities = CityService.SearchCityList(SearchCity);
+                    AdminHomePage.AllCitiesLV.ItemsSource = null;
+                    AdminHomePage.AllCitiesLV.Items.Clear();
+                    AdminHomePage.AllCitiesLV.ItemsSource = AllCities;
+                    AdminHomePage.AllCitiesLV.Items.Refresh();
+                });
+            }
+        }
+
+        private RelayCommand clearSearchCityCom;
+        public RelayCommand ClearSearchCityCom
+        {
+            get
+            {
+                return clearSearchCityCom ?? new RelayCommand(obj =>
+                {
+                    AllCities = CityService.GetAllCities();
+                    AdminHomePage.AllCitiesLV.ItemsSource = null;
+                    AdminHomePage.AllCitiesLV.Items.Clear();
+                    AdminHomePage.AllCitiesLV.ItemsSource = AllCities;
+                    AdminHomePage.AllCitiesLV.Items.Refresh();
+                    SearchCity = null;
+                });
+            }
         }
         #endregion
 
@@ -446,6 +484,40 @@ namespace Sinsay.ViewsModels.AdminVM
             EditPickupPoint wnd = new(point);
             wnd.ShowDialog();
         }
+
+        //searh
+        private RelayCommand searchPickupCom;
+        public RelayCommand SearchPickupCom
+        {
+            get
+            {
+                return searchPickupCom ?? new RelayCommand(obj =>
+                {
+                    AllPickupPoint = PickiupPointService.SearchPickupPointList(SearchPickup);
+                    AdminHomePage.AllPickupPointLV.ItemsSource = null;
+                    AdminHomePage.AllPickupPointLV.Items.Clear();
+                    AdminHomePage.AllPickupPointLV.ItemsSource = AllPickupPoint;
+                    AdminHomePage.AllPickupPointLV.Items.Refresh();
+                });
+            }
+        }
+
+        private RelayCommand clearSearchPickupCom;
+        public RelayCommand ClearSearchPickupCom
+        {
+            get
+            {
+                return clearSearchPickupCom ?? new RelayCommand(obj =>
+                {
+                    AllPickupPoint = PickiupPointService.GetAllPickupPoint();
+                    AdminHomePage.AllPickupPointLV.ItemsSource = null;
+                    AdminHomePage.AllPickupPointLV.Items.Clear();
+                    AdminHomePage.AllPickupPointLV.ItemsSource = AllPickupPoint;
+                    AdminHomePage.AllPickupPointLV.Items.Refresh();
+                    SearchPickup = null;
+                });
+            }
+        }
         #endregion
 
         #region AppUsers
@@ -597,6 +669,41 @@ namespace Sinsay.ViewsModels.AdminVM
                 });
             }
         }
+
+
+        //searh
+        private RelayCommand searchUserCom;
+        public RelayCommand SearchUserCom
+        {
+            get
+            {
+                return searchUserCom ?? new RelayCommand(obj =>
+                {
+                    AllAppUsers = UserService.SearchUserList(SearchUser);
+                    AdminHomePage.AllAppUsers.ItemsSource = null;
+                    AdminHomePage.AllAppUsers.Items.Clear();
+                    AdminHomePage.AllAppUsers.ItemsSource = AllAppUsers;
+                    AdminHomePage.AllAppUsers.Items.Refresh();
+                });
+            }
+        }
+
+        private RelayCommand clearSearchUserCom;
+        public RelayCommand ClearSearchUserCom
+        {
+            get
+            {
+                return clearSearchUserCom ?? new RelayCommand(obj =>
+                {
+                    AllAppUsers = UserService.GetAllUsers();
+                    AdminHomePage.AllAppUsers.ItemsSource = null;
+                    AdminHomePage.AllAppUsers.Items.Clear();
+                    AdminHomePage.AllAppUsers.ItemsSource = AllAppUsers;
+                    AdminHomePage.AllAppUsers.Items.Refresh();
+                    SearchUser = null;
+                });
+            }
+        }
         #endregion
 
         #region Clothes
@@ -709,6 +816,40 @@ namespace Sinsay.ViewsModels.AdminVM
         {
             EditClothes wnd = new EditClothes(clothes);
             wnd.ShowDialog();
+        }
+
+        //searh
+        private RelayCommand searchClothesCom;
+        public RelayCommand SearchClothesCom
+        {
+            get
+            {
+                return searchClothesCom ?? new RelayCommand(obj =>
+                {
+                    AllClothes = ClothesService.SearchClothesList(SearchClothes);
+                    AdminHomePage.AllClothes.ItemsSource = null;
+                    AdminHomePage.AllClothes.Items.Clear();
+                    AdminHomePage.AllClothes.ItemsSource = AllClothes;
+                    AdminHomePage.AllClothes.Items.Refresh();
+                });
+            }
+        }
+
+        private RelayCommand clearSearchClothesCom;
+        public RelayCommand ClearSearchClothesCom
+        {
+            get
+            {
+                return clearSearchClothesCom ?? new RelayCommand(obj =>
+                {
+                    AllClothes = ClothesService.GetAllClothes();
+                    AdminHomePage.AllClothes.ItemsSource = null;
+                    AdminHomePage.AllClothes.Items.Clear();
+                    AdminHomePage.AllClothes.ItemsSource = AllClothes;
+                    AdminHomePage.AllClothes.Items.Refresh();
+                    SearchClothes = null;
+                });
+            }
         }
         #endregion
 

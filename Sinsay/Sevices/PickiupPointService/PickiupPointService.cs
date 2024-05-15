@@ -20,6 +20,16 @@ namespace Sinsay.Sevices.PickiupPointService
             }
         }
 
+        public static List<PickupPoint> SearchPickupPointList(string search)
+        {
+            using (AppDbContext db = new())
+            {
+
+                List<PickupPoint> pickupPoints = db.PickupPoints.Include(x => x.City).Where(x => x.Name.Contains(search)).ToList();
+                return pickupPoints;
+            }
+        }
+
         public static bool AddPickupPoint (string name, string address, City _city)
         {
             try

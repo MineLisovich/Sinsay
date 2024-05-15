@@ -46,6 +46,8 @@ namespace Sinsay.Views.Admin
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow wnd = new MainWindow();
+            wnd.Show();
             this.Close();
         }
     }
