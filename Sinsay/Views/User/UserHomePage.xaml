@@ -30,7 +30,7 @@
         
         <!--MAIN MENU-->
         <StackPanel Grid.Row="1" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Orientation="Horizontal">
-            <Button  Content="Профиль"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <Button  Content="Изменить пароль" Command="{Binding OpenChangePassword}" Height="30" Width="150" FontFamily="Bahnschrift Condensed" FontSize="20"/>
             <Button  Content="Корзина" x:Name="shoppingCart" Click="shoppingCart_Click" Margin="20,0,0,0" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
             <Button  Content="Мои заказы" x:Name="order" Click="order_Click" Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
         </StackPanel>

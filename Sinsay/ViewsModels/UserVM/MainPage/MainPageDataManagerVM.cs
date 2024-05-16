@@ -2,9 +2,14 @@
 using Sinsay.Sevices;
 using Sinsay.Sevices.ClothesService;
 using Sinsay.Sevices.ShoppingCartService;
+using Sinsay.Sevices.UserServices;
+using Sinsay.Views.ResultWindow;
 using Sinsay.Views.User;
+using Sinsay.Views.User.WindowsChangePassword;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Sinsay.ViewsModels.UserVM.MainPage
 {
@@ -14,6 +19,7 @@ namespace Sinsay.ViewsModels.UserVM.MainPage
         //initialization prop
         public static Clothes SelectedClothes { get; set; }
         public static string SearchClothes { get; set; }
+        public static string NewPass {  get; set; }
 
 
         //initialization data
@@ -86,6 +92,76 @@ namespace Sinsay.ViewsModels.UserVM.MainPage
             }
         }
 
+        //OpenChangePassword
+        private RelayCommand openChangePassword;
+        public RelayCommand OpenChangePassword
+        {
+            get
+            {
+                return openChangePassword ?? new RelayCommand(obj =>
+                {
+                    OpenChangePasswordMethod();
+                });
+            }
+        }
+        private void OpenChangePasswordMethod()
+        {
+            ChangePasswordPage wnd = new ChangePasswordPage();
+            wnd.ShowDialog();
+        }
+
+        //СhangePass
+        private RelayCommand changePass;
+        public RelayCommand ChangePass
+        {
+            get
+            {
+                return changePass ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    if (NewPass is null || NewPass.Replace(" ", "").Length == 0)
+                    {
+                        ValidationsError(wnd, "tb_name");
+                    }
+                    else
+                    {
+                        bool result = UserService.ChangePassword(userId: App.currentUser.Id, newpass: NewPass);
+                        ShowMessageToUser(result);
+                        NewPass = null;
+                        wnd.Close();
+                    }
+                });
+            }
+        }
+
+
+
+
+        private void OpenWindowCS(Window window)
+        {
+            window.Owner = Application.Current.MainWindow;
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.ShowDialog();
+        }
+        private void ShowMessageToUser(bool result)
+        {
+
+            if (result is true)
+            {
+                MessageView msView = new("Успех");
+                OpenWindowCS(msView);
+            }
+            else
+            {
+                MessageView msView = new("Ошибка");
+                OpenWindowCS(msView);
+            }
+        }
+        private void ValidationsError(Window wnd, string blockName)
+        {
+            Control block = wnd.FindName(blockName) as Control;
+            block.BorderBrush = Brushes.Red;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propName)
         {

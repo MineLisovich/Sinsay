@@ -30,8 +30,7 @@
 
         <!--MAIN MENU-->
         <StackPanel Grid.Row="1" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Orientation="Horizontal">
-            <Button  Content="Профиль"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
-            <Button  Content="Корзина" x:Name="shoppingCart" Click="shoppingCart_Click" Margin="20,0,0,0" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <Button  Content="Корзина" x:Name="shoppingCart" Click="shoppingCart_Click" Margin="0,0,0,0" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
             <Button  Content="Товары" x:Name="clothes" Click="clothes_Click" Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
         </StackPanel>
         <!--END MAIN MENU-->

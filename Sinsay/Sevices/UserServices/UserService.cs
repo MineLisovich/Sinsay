@@ -140,6 +140,19 @@ namespace Sinsay.Sevices.UserServices
             }
         }
 
-       
+       public static bool ChangePassword(int userId, string newpass)
+       {
+            try
+            {
+                using(AppDbContext db = new())
+                {
+                    AppUser? getuser = db.Users.FirstOrDefault(x=>x.Id == userId);
+                    getuser.PasswordHash = PasswordHashService.CreateHash(newpass);
+                    db.SaveChanges();  
+                }
+                return true;
+            }
+            catch { return false; }
+       }
     }
 }
