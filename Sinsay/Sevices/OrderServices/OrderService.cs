@@ -61,6 +61,15 @@ namespace Sinsay.Sevices.OrderServices
             }
         }
 
+        public static List<Order> GetAllOrders()
+        {
+            using (AppDbContext db = new())
+            {
+                List<Order> orders = db.Orders.Include(x => x.AppUser).Include(x => x.OrderStatus).Include(x => x.PickupPoint).Include(x => x.PaymentMethod).ToList();
+                return orders;
+            }
+        }
+
         public static bool CancelOrderForUserArea(int orderId)
         {
             try
@@ -81,11 +90,39 @@ namespace Sinsay.Sevices.OrderServices
             catch { return false; }
         }
 
+        public static bool ChangeOrderSatusForAdminArea(int orderId, OrderStatus _status)
+        {
+            try
+            {
+                using (AppDbContext db = new())
+                {
+                    Order? order = db.Orders.Include(x=>x.AppUser).FirstOrDefault(x => x.Id == orderId);
+                    order.OrderStatusId = _status.Id;
+                    db.SaveChanges();
+
+                    //Электронный чек
+                    SendEmailService send = new();
+                    send.SendEmailAsync(email: order.AppUser.Email, subject:"Изменился статус заказа", message:"Статус вашего заказа: " + _status.Name);
+                }
+                return true;
+            }
+            catch { return false; }
+        }
+
         public static List<Order> SearchOrderList(int userId, string search)
         {
             using (AppDbContext db = new())
             {
                 List<Order> orders = db.Orders.Include(x => x.AppUser).Include(x => x.OrderStatus).Include(x => x.PickupPoint).Include(x => x.PaymentMethod).Where(x => x.AppUserId == userId && x.Name.Contains(search)).ToList();
+                return orders;
+            }
+        }
+
+        public static List<Order> SearchOrderListForAdmin(string search)
+        {
+            using (AppDbContext db = new())
+            {
+                List<Order> orders = db.Orders.Include(x => x.AppUser).Include(x => x.OrderStatus).Include(x => x.PickupPoint).Include(x => x.PaymentMethod).Where(x=>x.AppUser.Email.Contains(search)).ToList();
                 return orders;
             }
         }

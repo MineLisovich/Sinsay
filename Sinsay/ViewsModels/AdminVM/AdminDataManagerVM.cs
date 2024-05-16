@@ -7,6 +7,7 @@ using Sinsay.Sevices.PaymentMethodService;
 using Sinsay.Sevices.PickiupPointService;
 using Sinsay.Sevices.UserServices;
 using Sinsay.Views.Admin;
+using Sinsay.Views.Admin.WindowsManagerData.WindowsChangesOrderStatus;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsCityData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsClothesData;
 using Sinsay.Views.Admin.WindowsManagerData.WindowsOrderStatusData;
@@ -17,6 +18,7 @@ using Sinsay.Views.ResultWindow;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Sinsay.ViewsModels.AdminVM
@@ -63,6 +65,10 @@ namespace Sinsay.ViewsModels.AdminVM
         public static decimal ClothesPrice { get; set; }
         public static string SearchClothes { get; set; }
 
+        //orders
+        public static Order SelectedOrder { get; set; }
+        public static OrderStatus SelectListOrderStatus { get; set; }
+        public static string SearchOrder {  get; set; }
 
         #endregion
 
@@ -120,6 +126,13 @@ namespace Sinsay.ViewsModels.AdminVM
         {
             get { return allClothes; }
             set { allClothes = value; NotifyPropertyChanged(nameof(AllClothes)); }
+        }
+
+        private List<Order> allOrders = OrderService.GetAllOrders();
+        public List<Order> AllOrders
+        {
+            get {  return allOrders; }
+            set { allOrders = value; NotifyPropertyChanged(nameof(AllOrders));}
         }
         #endregion
 
@@ -852,6 +865,136 @@ namespace Sinsay.ViewsModels.AdminVM
         }
         #endregion
 
+        #region Orders
+        //Open Change Order Stat Wnd
+        private void OpenChangeOrderStatWndMet()
+        {
+            ChangeStatusOrder wnd = new();
+            wnd.ShowDialog();
+        }
+        private RelayCommand openChangeOrderStatWnd;
+        public RelayCommand OpenChangeOrderStatWnd
+        {
+            get
+            {
+                return openChangeOrderStatWnd ?? new RelayCommand(obj =>
+                {
+                    OpenChangeOrderStatWndMet();
+                });
+            }
+        }
+
+        //ChangeOrderStatusCOM
+        private RelayCommand changeOrderStatusCOM;
+        public RelayCommand ChangeOrderStatusCOM
+        {
+            get
+            {
+                return changeOrderStatusCOM ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    bool result = false;
+                    if (SelectedOrder is not null)
+                    {
+                        if(SelectListOrderStatus is null)
+                        {
+                            MessageBox.Show("Выберите статус");
+                        }
+                        else
+                        {
+                            result = OrderService.ChangeOrderSatusForAdminArea(orderId: SelectedOrder.Id,_status:SelectListOrderStatus);
+                            ShowMessageToUser(result);
+                            GlobalUpdateView();
+                            wnd.Close();
+                        }
+                    }
+                });
+            }
+        }
+
+        //search
+        //searh
+        private RelayCommand searchOrderCom;
+        public RelayCommand SearchOrderCom
+        {
+            get
+            {
+                return searchOrderCom ?? new RelayCommand(obj =>
+                {
+                    AllOrders = OrderService.SearchOrderListForAdmin(SearchOrder);
+                    AdminHomePage.AllOrdersLV.ItemsSource = null;
+                    AdminHomePage.AllOrdersLV.Items.Clear();
+                    AdminHomePage.AllOrdersLV.ItemsSource = AllOrders;
+                    AdminHomePage.AllOrdersLV.Items.Refresh();
+                });
+            }
+        }
+
+        private RelayCommand clearSearchOrderCom;
+        public RelayCommand ClearSearchOrderCom
+        {
+            get
+            {
+                return clearSearchOrderCom ?? new RelayCommand(obj =>
+                {
+                    AllOrders = OrderService.GetAllOrders();
+                    AdminHomePage.AllOrdersLV.ItemsSource = null;
+                    AdminHomePage.AllOrdersLV.Items.Clear();
+                    AdminHomePage.AllOrdersLV.ItemsSource = AllOrders;
+                    AdminHomePage.AllOrdersLV.Items.Refresh();
+                    SearchOrder = null;
+                });
+            }
+        }
+
+        //Print ALL
+        private RelayCommand printAll;
+        public RelayCommand PrintAll
+        {
+            get
+            {
+                return printAll ?? new RelayCommand(obj =>
+                {
+                    FlowDocument fd = new FlowDocument();
+                    foreach (var item in AllOrders)
+                    {
+                        fd.Blocks.Add(new Paragraph(new Run(item.ToString())));
+                        // Вам может потребоваться создать метод ToString в вашем типе, если это строка, то это нормально
+                    }
+                    PrintDialog pd = new PrintDialog();
+                    if (pd.ShowDialog() != true) return;
+                    fd.PageHeight = pd.PrintableAreaHeight;
+                    fd.PageWidth = pd.PrintableAreaWidth;
+                    IDocumentPaginatorSource idocument = fd as IDocumentPaginatorSource;
+                    pd.PrintDocument(idocument.DocumentPaginator, "Печать документа...");
+                });
+            }
+        }
+
+        //Print Singl
+        private RelayCommand printSingl;
+        public RelayCommand PrintSingl
+        {
+            get
+            {
+                return printSingl ?? new RelayCommand(obj =>
+                {
+                    if (SelectedOrder is not null)
+                    {
+                        FlowDocument fd = new FlowDocument();
+                        fd.Blocks.Add(new Paragraph(new Run(SelectedOrder.ToString())));
+                        PrintDialog pd = new PrintDialog();
+                        if (pd.ShowDialog() != true) return;
+                        fd.PageHeight = pd.PrintableAreaHeight;
+                        fd.PageWidth = pd.PrintableAreaWidth;
+                        IDocumentPaginatorSource idocument = fd as IDocumentPaginatorSource;
+                        pd.PrintDocument(idocument.DocumentPaginator, "Печать документа...");
+                    }
+                });
+            }
+        }
+        #endregion
+
         #region Edit && DELETE COMMAND
 
         #region EDIT OPEN WIND
@@ -1001,6 +1144,7 @@ namespace Sinsay.ViewsModels.AdminVM
             UpdateTableInPickupView();
             UpdateTableInAppUserView();
             UpdateTableInClothesView();
+            UpdateTableInOrderView();
         }
 
         private void UpdateTableInCityView()
@@ -1054,6 +1198,17 @@ namespace Sinsay.ViewsModels.AdminVM
             AdminHomePage.AllClothes.ItemsSource = AllClothes;
             AdminHomePage.AllClothes.Items.Refresh();
         }
+
+        private void UpdateTableInOrderView()
+        {
+            AllOrders = OrderService.GetAllOrders();
+            AdminHomePage.AllOrdersLV.ItemsSource = null;
+            AdminHomePage.AllOrdersLV.Items.Clear();
+            AdminHomePage.AllOrdersLV.ItemsSource = AllOrders;
+            AdminHomePage.AllOrdersLV.Items.Refresh();
+        }
+
+
         #endregion
         private void ShowMessageToUser(bool result)
         {

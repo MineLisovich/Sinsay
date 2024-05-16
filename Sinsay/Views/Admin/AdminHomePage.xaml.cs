@@ -16,6 +16,7 @@ namespace Sinsay.Views.Admin
         public static ListView AllPickupPointLV;
         public static ListView AllAppUsers;
         public static ListView AllClothes;
+        public static ListView AllOrdersLV;
         public AdminHomePage()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace Sinsay.Views.Admin
             AllPickupPointLV = ViewAllPickupPoint;
             AllAppUsers = ViewAllAppUsers;
             AllClothes = ViewAllClothes;
+            AllOrdersLV = ViewAllOrders;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

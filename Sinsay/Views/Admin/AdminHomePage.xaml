@@ -111,23 +111,39 @@
                 <TabItem.Header>
                     <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Модерация заказов"/>
                 </TabItem.Header>
-
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding OpenChangeOrderStatWnd}" Header="Изменть статус заказа"/>
+                        <MenuItem Command="{Binding PrintSingl}" Header="Печать"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="1">
+
+                    <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBox Width="365" Text="{Binding SearchOrder}" TextAlignment="Center" ToolTip="Поиск" />
+                        <Button Content="Искать"  Command="{Binding SearchOrderCom}" FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
+                        <Button Content="Очистить" Command="{Binding ClearSearchOrderCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
+                        <Button Content="Печатать всё" Command="{Binding PrintAll}"   FontFamily="Bahnschrift Condensed" FontSize="15" Margin="50,0,0,0"></Button>
+                    </StackPanel>
+
+                    <ListView Grid.Row="1" x:Name="ViewAllOrders" ItemsSource="{Binding AllOrders}" SelectedItem="{Binding SelectedOrder}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id"/>
-                                <GridViewColumn Header="Статус заказа"/>
-                                <GridViewColumn Header="Пользователь"/>
-                                <GridViewColumn Header="Перечень заказа"/>
-                                <GridViewColumn Header="Дата заказа"/>
-                                <GridViewColumn Header="Выдача заказа"/>
-                                <GridViewColumn Header="Сумма заказа"/>
-                                <GridViewColumn Header="Способ оплаты"/>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Наименование заказа" DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Статус заказа" DisplayMemberBinding="{Binding Path=OrderStatus.Name}"/>
+                                <GridViewColumn Header="Email Пользователя" DisplayMemberBinding="{Binding Path=AppUser.Email}"/>
+                                <GridViewColumn Header="Телефон Пользователя" DisplayMemberBinding="{Binding Path=AppUser.PhoneNumber}"/>
+                                <GridViewColumn Header="Дата заказа" DisplayMemberBinding="{Binding Path=OrderDate}"/>
+                                <GridViewColumn Header="Сумма заказа" DisplayMemberBinding="{Binding Path=TotalPrice}"/>
+                                <GridViewColumn Header="Способ оплаты" DisplayMemberBinding="{Binding Path=PaymentMethod.Name}"/>
+                                <GridViewColumn Header="ПВЗ" DisplayMemberBinding="{Binding Path=PickupPoint.Name}"/>
+                                <GridViewColumn Header="ПВЗ Адрес" DisplayMemberBinding="{Binding Path=PickupPoint.Address}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

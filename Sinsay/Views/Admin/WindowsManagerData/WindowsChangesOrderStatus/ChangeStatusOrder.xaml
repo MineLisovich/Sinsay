@@ -1,0 +1,32 @@
+﻿<Window x:Class="Sinsay.Views.Admin.WindowsManagerData.WindowsChangesOrderStatus.ChangeStatusOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sinsay.Views.Admin.WindowsManagerData.WindowsChangesOrderStatus"
+        mc:Ignorable="d"
+        Title="Sinsay - Изменить статус заказа" Height="250" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Name="ChangeOrderStatusWND">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="TBlockHeder" Text="Изменить статус заказа" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="56" Width="263" FontFamily="Bahnschrift Condensed"/>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Статус:</Label>
+                    <ComboBox x:Name="tb_role" ItemsSource="{Binding AllOrderStatuses}" SelectedItem="{Binding SelectListOrderStatus}" DisplayMemberPath="Name" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></ComboBox>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 0">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button x:Name="Add" Command="{Binding ChangeOrderStatusCOM}" CommandParameter="{Binding ElementName=ChangeOrderStatusWND}" Content="Изменить"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="22"></Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
