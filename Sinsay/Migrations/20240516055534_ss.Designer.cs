@@ -12,7 +12,7 @@ using Sinsay.Domain;
 namespace Sinsay.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240515205008_ss")]
+    [Migration("20240516055534_ss")]
     partial class ss
     {
         /// <inheritdoc />
@@ -258,6 +258,11 @@ namespace Sinsay.Migrations
                         {
                             Id = 4,
                             Name = "Готов к выдаче"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Отменён"
                         });
                 });
 

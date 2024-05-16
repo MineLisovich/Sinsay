@@ -255,6 +255,11 @@ namespace Sinsay.Migrations
                         {
                             Id = 4,
                             Name = "Готов к выдаче"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Отменён"
                         });
                 });
 

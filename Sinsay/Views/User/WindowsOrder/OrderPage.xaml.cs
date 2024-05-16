@@ -1,5 +1,5 @@
-﻿using Sinsay.Views.User.WindowsOrder;
-using Sinsay.ViewsModels.UserVM.ShoppingCartPage;
+﻿using Sinsay.Views.User.WindowsShoppingCart;
+using Sinsay.ViewsModels.UserVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,31 +14,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Sinsay.Views.User.WindowsShoppingCart
+namespace Sinsay.Views.User.WindowsOrder
 {
     /// <summary>
-    /// Interaction logic for ShoppingCartPage.xaml
+    /// Interaction logic for OrderPage.xaml
     /// </summary>
-    public partial class ShoppingCartPage : Window
+    public partial class OrderPage : Window
     {
-        public static ListView ShoppingCartLV;
-        public ShoppingCartPage()
+        public static ListView AllUserOrdersLV;
+        public OrderPage()
         {
             InitializeComponent();
-            DataContext = new ShoppingCartDataManagerVM();
-            ShoppingCartLV = ViewShoppingCart;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            TbUserName.Text = $"Привет, {App.currentUser.UserName}";
-           
+            DataContext = new OrderPageDataManagerVM();
+            AllUserOrdersLV = ViewAllUserOrder;
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             MainWindow wnd = new MainWindow();
             wnd.Show();
+            this.Close();
+        }
+
+        private void shoppingCart_Click(object sender, RoutedEventArgs e)
+        {
+            ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+            shoppingCartPage.Show();
             this.Close();
         }
 
@@ -49,11 +50,9 @@ namespace Sinsay.Views.User.WindowsShoppingCart
             this.Close();
         }
 
-        private void order_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            OrderPage orderPage = new OrderPage();
-            orderPage.Show();
-            this.Close();
+            TbUserName.Text = $"Привет, {App.currentUser.UserName}";
         }
     }
 }

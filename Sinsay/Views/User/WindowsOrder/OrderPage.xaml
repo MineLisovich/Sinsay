@@ -1,14 +1,14 @@
-﻿<Window x:Class="Sinsay.Views.User.UserHomePage"
+﻿<Window x:Class="Sinsay.Views.User.WindowsOrder.OrderPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Sinsay.Views.User"
+        xmlns:local="clr-namespace:Sinsay.Views.User.WindowsOrder"
         mc:Ignorable="d"
-        Title="Sinsay" Height="720" Width="1024"
+        Title="Sinsay - Мои заказы" Height="720" Width="1024"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
-        Name="MainPageUserAreaWND">
+        Name="OrderWND">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition  Height="40"/>
@@ -16,7 +16,7 @@
             <RowDefinition  Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <!--HEADER--> 
+        <!--HEADER-->
         <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Matura MT Script Capitals" Width="200" VerticalAlignment="Center"/>
@@ -27,38 +27,42 @@
             <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
         </StackPanel>
         <!--END HEADER-->
-        
+
         <!--MAIN MENU-->
         <StackPanel Grid.Row="1" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Orientation="Horizontal">
             <Button  Content="Профиль"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
             <Button  Content="Корзина" x:Name="shoppingCart" Click="shoppingCart_Click" Margin="20,0,0,0" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
-            <Button  Content="Мои заказы" x:Name="order" Click="order_Click" Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <Button  Content="Товары" x:Name="clothes" Click="clothes_Click" Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
         </StackPanel>
         <!--END MAIN MENU-->
-        
+
         <!--SEARCH-->
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-            <TextBox Width="365" Text="{Binding SearchClothes}" TextAlignment="Center" ToolTip="Поиск" />
-            <Button Content="Искать" Command="{Binding SearchClothesCom}"  FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
-            <Button Content="Очистить"  Command="{Binding ClearSearchClothesCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
+            <TextBox Width="365" Text="{Binding SearchOrderName}" TextAlignment="Center" ToolTip="Поиск" />
+            <Button Content="Искать" Command="{Binding SearchOrdersCom}"  FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
+            <Button Content="Очистить"  Command="{Binding ClearSearchOrdersCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
         </StackPanel>
         <!--END SEARCH-->
-        
-        <!--CLOTHES LIST-->
-        <ListView x:Name="ViewAllClothesUserArea" Grid.Row="3" ItemsSource="{Binding AllClothes}" SelectedItem="{Binding SelectedClothes}">
+
+        <!--ORDERS LIST-->
+        <ListView x:Name="ViewAllUserOrder" Grid.Row="3" ItemsSource="{Binding AllOrders}" SelectedItem="{Binding SelectedOrder}">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Добавить в корзину" Command="{Binding AddToShopingCart}" CommandParameter="{Binding ElementName=MainPageUserAreaWND}"/>
+                    <MenuItem Header="Отменить заказ" Command="{Binding CancelOrder}"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="450" Header="Наименование товара" DisplayMemberBinding="{Binding Path=Name}"/>
-                    <GridViewColumn Width="450" Header="Описание" DisplayMemberBinding="{Binding Path=Description}"/>
-                    <GridViewColumn Width="auto" Header="Цена" DisplayMemberBinding="{Binding Path=Price}"/>
+                    <GridViewColumn Width="auto" Header="Дата заказа" DisplayMemberBinding="{Binding Path=OrderDate}"/>
+                    <GridViewColumn Width="auto" Header="Перечень товаров" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Width="auto" Header="Итого" DisplayMemberBinding="{Binding Path=TotalPrice}"/>
+                    <GridViewColumn Width="auto" Header="Способ оплаты" DisplayMemberBinding="{Binding Path=PaymentMethod.Name}"/>
+                    <GridViewColumn Width="auto" Header="ПВЗ" DisplayMemberBinding="{Binding Path=PickupPoint.Name}"/>
+                    <GridViewColumn Width="auto" Header="Адрес ПВЗ" DisplayMemberBinding="{Binding Path=PickupPoint.Address}"/>
+                    <GridViewColumn Width="auto" Header="Статус заказа" DisplayMemberBinding="{Binding Path=OrderStatus.Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <!--END CLOTHES LIST -->
+        <!--END ORDERS LIST -->
     </Grid>
 </Window>

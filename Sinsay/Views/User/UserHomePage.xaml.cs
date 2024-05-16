@@ -1,4 +1,5 @@
 ﻿using Sinsay.Views.Admin.WindowsManagerData.WindowsClothesData;
+using Sinsay.Views.User.WindowsOrder;
 using Sinsay.Views.User.WindowsShoppingCart;
 using Sinsay.ViewsModels.UserVM.MainPage;
 using System.Windows;
@@ -36,6 +37,13 @@ namespace Sinsay.Views.User
         {
             ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
             shoppingCartPage.Show();
+            this.Close();
+        }
+
+        private void order_Click(object sender, RoutedEventArgs e)
+        {
+            OrderPage orderPage = new OrderPage();
+            orderPage.Show();
             this.Close();
         }
     }

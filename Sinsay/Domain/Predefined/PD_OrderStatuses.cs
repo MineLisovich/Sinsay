@@ -26,12 +26,17 @@ namespace Sinsay.Domain.Predefined
             Name = "Готов к выдаче"
         };
 
+        OrderStatus orderSt5 = new()
+        {
+            Id = 5,
+            Name = "Отменён"
+        };
         public readonly List<OrderStatus> orders;
         public PD_OrderStatuses()
         {
             orders = new()
             {
-                orderSt1, orderSt2, orderSt3, orderSt4
+                orderSt1, orderSt2, orderSt3, orderSt4, orderSt5
             };
         }
     }

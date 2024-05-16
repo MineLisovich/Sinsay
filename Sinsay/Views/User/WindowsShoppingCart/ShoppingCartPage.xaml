@@ -33,7 +33,7 @@
         <StackPanel Grid.Row="1" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Orientation="Horizontal">
             <Button  Content="Товары" x:Name="clothes" Click="clothes_Click" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
             <Button  Content="Профиль"  Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
-            <Button  Content="Мои заказы" Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <Button  Content="Мои заказы" x:Name="order" Click="order_Click" Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
         </StackPanel>
         <!--END MAIN MENU-->
 
