@@ -8,7 +8,7 @@ namespace Sinsay.Models
         public required string Name { get; set; }
         public required string Description { get; set; }
         public int Count { get; set; }
-        [Precision(5, 2)]
+        [Precision(9, 2)]
         public decimal Price { get; set; }
     }
 }
