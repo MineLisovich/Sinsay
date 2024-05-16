@@ -16,14 +16,14 @@ namespace Sinsay.Domain
         public DbSet<PickupPoint> PickupPoints { get; set;}
         public DbSet<ShoppingCart> ShoppingCarts { get; set;}
 
-        public AppDbContext()
-        {
-            Database.EnsureCreated();
-        }
+        //public AppDbContext()
+        //{
+        //    Database.EnsureCreated();
+        //}
 
         protected override void OnConfiguring (DbContextOptionsBuilder opts)
         {
-            opts.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=sinsaydb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            opts.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\sinsaydb.mdf;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
