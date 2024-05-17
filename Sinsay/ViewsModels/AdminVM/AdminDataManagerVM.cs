@@ -1030,7 +1030,7 @@ namespace Sinsay.ViewsModels.AdminVM
                                 {"PickupPointAddress",SelectedOrder.PickupPoint.Address}
                             };
                             var engine = new Engine();
-                            engine.Merge(".\\template.docx", fields, ".\\Chek\\output.docx");
+                            engine.Merge(".\\template.docx", fields, $".\\Chek\\Чек ном.{SelectedOrder.Id}.docx");
                             MessageBox.Show("Word файл чека лежит в папке Chek", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         catch
