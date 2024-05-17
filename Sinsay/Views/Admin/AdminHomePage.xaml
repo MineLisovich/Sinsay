@@ -115,6 +115,8 @@
                     <ContextMenu>
                         <MenuItem Command="{Binding OpenChangeOrderStatWnd}" Header="Изменть статус заказа"/>
                         <MenuItem Command="{Binding PrintSingl}" Header="Печать"/>
+                        <MenuItem Command="{Binding ExpotToWord}" Header="Word"/>
+                        
                     </ContextMenu>
                 </TabItem.ContextMenu>
                 
