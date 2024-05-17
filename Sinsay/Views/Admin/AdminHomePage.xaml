@@ -53,7 +53,7 @@
                     <ListView Grid.Row="1" x:Name="ViewAllClothes" ItemsSource="{Binding AllClothes}" SelectedItem="{Binding SelectedClothes}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Артикул" DisplayMemberBinding="{Binding Path=Id}"/>
                                 <GridViewColumn Header="Наименование товара" DisplayMemberBinding="{Binding Path=Name}"/>
                                 <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Path=Description}"/>
                                 <GridViewColumn Header="Количество на складе" DisplayMemberBinding="{Binding Path=Count}"/>
@@ -134,10 +134,11 @@
                     <ListView Grid.Row="1" x:Name="ViewAllOrders" ItemsSource="{Binding AllOrders}" SelectedItem="{Binding SelectedOrder}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Номер заказа" DisplayMemberBinding="{Binding Path=Id}"/>
                                 <GridViewColumn Header="Наименование заказа" DisplayMemberBinding="{Binding Path=Name}"/>
                                 <GridViewColumn Header="Статус заказа" DisplayMemberBinding="{Binding Path=OrderStatus.Name}"/>
                                 <GridViewColumn Header="Email Пользователя" DisplayMemberBinding="{Binding Path=AppUser.Email}"/>
+                                <GridViewColumn Header="Имя пользователя" DisplayMemberBinding="{Binding Path=AppUser.UserName}"/>
                                 <GridViewColumn Header="Телефон Пользователя" DisplayMemberBinding="{Binding Path=AppUser.PhoneNumber}"/>
                                 <GridViewColumn Header="Дата заказа" DisplayMemberBinding="{Binding Path=OrderDate}"/>
                                 <GridViewColumn Header="Сумма заказа" DisplayMemberBinding="{Binding Path=TotalPrice}"/>

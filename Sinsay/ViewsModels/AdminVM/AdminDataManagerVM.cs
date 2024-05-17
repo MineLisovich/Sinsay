@@ -20,6 +20,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Sinsay.ViewsModels.AdminVM
 {
@@ -956,10 +957,16 @@ namespace Sinsay.ViewsModels.AdminVM
                 return printAll ?? new RelayCommand(obj =>
                 {
                     FlowDocument fd = new FlowDocument();
+                    string HEADER = "SINSAY\nСписок заказов\n";
+                    fd.Blocks.Add(new Paragraph(new Run(HEADER)));
+
+                    string convertDataToString = "";
                     foreach (var item in AllOrders)
                     {
-                        fd.Blocks.Add(new Paragraph(new Run(item.ToString())));
-                        // Вам может потребоваться создать метод ToString в вашем типе, если это строка, то это нормально
+                        convertDataToString = "Заказ номер: " +item.Id +"\nНаименование - "+ item.Name + "\nСтатус - " + item.OrderStatus.Name + "\nEmail пользователя - " + item.AppUser.Email + "\nИмя пользователя - "+item.AppUser.UserName+ "\nНомер телефона - " + item.AppUser.PhoneNumber + "\nДата заказа - " + item.OrderDate + "\nИтого - " + item.TotalPrice + "\nСпособ оплаты - " + item.PaymentMethod.Name + "\nПВЗ - " + item.PickupPoint.Name + "\nАдрес - " + item.PickupPoint.Address +"\n" +"-----------------------";
+                        fd.Blocks.Add(new Paragraph(new Run(convertDataToString.ToString())));
+                        convertDataToString = "";
+
                     }
                     PrintDialog pd = new PrintDialog();
                     if (pd.ShowDialog() != true) return;
@@ -982,7 +989,10 @@ namespace Sinsay.ViewsModels.AdminVM
                     if (SelectedOrder is not null)
                     {
                         FlowDocument fd = new FlowDocument();
-                        fd.Blocks.Add(new Paragraph(new Run(SelectedOrder.ToString())));
+                        string HEADER = "SINSAY\nЭлектронный чек № "+ SelectedOrder.Id +"\n";
+                        fd.Blocks.Add(new Paragraph(new Run(HEADER)));
+                        string convertDataToString = "Наименование - " + SelectedOrder.Name + "\nСтатус - " + SelectedOrder.OrderStatus.Name + "\nEmail пользователя - " + SelectedOrder.AppUser.Email + "\nИмя пользователя - " + SelectedOrder.AppUser.UserName + "\nНомер телефона - " + SelectedOrder.AppUser.PhoneNumber + "\nДата заказа - " + SelectedOrder.OrderDate + "\nИтого - " + SelectedOrder.TotalPrice + "\nСпособ оплаты - " + SelectedOrder.PaymentMethod.Name + "\nПВЗ - " + SelectedOrder.PickupPoint.Name + "\nАдрес - " + SelectedOrder.PickupPoint.Address;
+                        fd.Blocks.Add(new Paragraph(new Run(convertDataToString.ToString())));
                         PrintDialog pd = new PrintDialog();
                         if (pd.ShowDialog() != true) return;
                         fd.PageHeight = pd.PrintableAreaHeight;
@@ -1097,7 +1107,7 @@ namespace Sinsay.ViewsModels.AdminVM
         #region WINDOWS SETTINGS
         private void OpenWindowCS(Window window)
         {
-            window.Owner = Application.Current.MainWindow;
+            window.Owner = System.Windows.Application.Current.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }

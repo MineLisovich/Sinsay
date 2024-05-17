@@ -25,7 +25,7 @@
         </StackPanel>
         <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"  Orientation="Horizontal" >
             <TextBlock FontFamily="Bahnschrift Condensed" FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
-            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20" Margin="0,0,20,0"/>
         </StackPanel>
         <!--END HEADER-->
 
@@ -38,9 +38,9 @@
 
         <!--CREATE ORDER-->
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
-            <TextBlock Text="Итого: "  FontFamily="Bahnschrift Condensed" FontSize="16"></TextBlock>
+            <TextBlock Text="Итого: "  FontFamily="Bahnschrift Condensed" FontSize="16" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock x:Name="TotalPrice" Text="{Binding TotalPrice}" FontFamily="Bahnschrift Condensed" FontSize="18"></TextBlock>
-            <Button Content="Оформить заказ" Command="{Binding OpenCreateOrder}" FontFamily="Bahnschrift Condensed" FontSize="18" Margin="5,0,0,0"></Button>
+            <Button Content="Оформить заказ" Command="{Binding OpenCreateOrder}" FontFamily="Bahnschrift Condensed" FontSize="18" Margin="20,0,0,0"></Button>
         </StackPanel>
         <!--END CREATE ORDER-->
 
