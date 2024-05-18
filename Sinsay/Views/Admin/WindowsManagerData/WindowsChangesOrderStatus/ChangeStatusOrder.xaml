@@ -9,16 +9,22 @@
         WindowStartupLocation="CenterScreen"
         Name="ChangeOrderStatusWND">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF444444" Offset="1"/>
+                <GradientStop Color="White" Offset="0.277"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock x:Name="TBlockHeder" Text="Изменить статус заказа" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="56" Width="263" FontFamily="Bahnschrift Condensed"/>
+                <TextBlock x:Name="TBlockHeder" Text="Изменить статус заказа" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="56" Width="326"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Статус:</Label>
-                    <ComboBox x:Name="tb_role" ItemsSource="{Binding AllOrderStatuses}" SelectedItem="{Binding SelectListOrderStatus}" DisplayMemberPath="Name" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></ComboBox>
+                    <Label FontSize="18">Статус:</Label>
+                    <ComboBox x:Name="tb_role" ItemsSource="{Binding AllOrderStatuses}" SelectedItem="{Binding SelectListOrderStatus}" DisplayMemberPath="Name" Width="365" Height="27" FontSize="22"/>
                 </StackPanel>
             </StackPanel>
 

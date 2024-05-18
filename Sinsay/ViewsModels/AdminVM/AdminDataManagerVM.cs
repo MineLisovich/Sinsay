@@ -1,4 +1,5 @@
-﻿using Sinsay.Models;
+﻿using EasyDox;
+using Sinsay.Models;
 using Sinsay.Sevices;
 using Sinsay.Sevices.CityService;
 using Sinsay.Sevices.ClothesService;
@@ -20,6 +21,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Sinsay.ViewsModels.AdminVM
 {
@@ -55,7 +57,7 @@ namespace Sinsay.ViewsModels.AdminVM
         public static string UserName { get; set; }
         public static string UserPhoneNumber { get; set; }
         public static Role SelectListRolesUser { get; set; }
-        public static string SearchUser {  get; set; }
+        public static string SearchUser { get; set; }
 
         //Clothes
         public static Clothes SelectedClothes { get; set; }
@@ -68,7 +70,7 @@ namespace Sinsay.ViewsModels.AdminVM
         //orders
         public static Order SelectedOrder { get; set; }
         public static OrderStatus SelectListOrderStatus { get; set; }
-        public static string SearchOrder {  get; set; }
+        public static string SearchOrder { get; set; }
 
         #endregion
 
@@ -131,8 +133,8 @@ namespace Sinsay.ViewsModels.AdminVM
         private List<Order> allOrders = OrderService.GetAllOrders();
         public List<Order> AllOrders
         {
-            get {  return allOrders; }
-            set { allOrders = value; NotifyPropertyChanged(nameof(AllOrders));}
+            get { return allOrders; }
+            set { allOrders = value; NotifyPropertyChanged(nameof(AllOrders)); }
         }
         #endregion
 
@@ -651,10 +653,10 @@ namespace Sinsay.ViewsModels.AdminVM
                 {
                     Window wnd = obj as Window;
                     bool result = false;
-                    
+
                     if (SelectedTab.Name == "UsersTab" && SelectedAppUser is not null)
                     {
-                        result = UserService.BlockUnBlockUser(id:SelectedAppUser.Id,emailCurrUser:App.currentUser.Email, isblock:true);
+                        result = UserService.BlockUnBlockUser(id: SelectedAppUser.Id, emailCurrUser: App.currentUser.Email, isblock: true);
                         //ShowMessageToUser(result);
                         GlobalUpdateView();
                     }
@@ -783,13 +785,13 @@ namespace Sinsay.ViewsModels.AdminVM
         private RelayCommand editClothes;
         public RelayCommand EditClothes
         {
-            get 
+            get
             {
                 return editClothes ?? new RelayCommand(obj =>
                 {
                     Window wnd = obj as Window;
                     bool result = false;
-                    if(SelectedClothes is not null)
+                    if (SelectedClothes is not null)
                     {
                         if (ClothesName is null || ClothesName.Replace(" ", "").Length == 0)
                         {
@@ -819,7 +821,7 @@ namespace Sinsay.ViewsModels.AdminVM
                             wnd.Close();
                         }
                     }
-                    
+
                 });
             }
         }
@@ -896,13 +898,13 @@ namespace Sinsay.ViewsModels.AdminVM
                     bool result = false;
                     if (SelectedOrder is not null)
                     {
-                        if(SelectListOrderStatus is null)
+                        if (SelectListOrderStatus is null)
                         {
                             MessageBox.Show("Выберите статус");
                         }
                         else
                         {
-                            result = OrderService.ChangeOrderSatusForAdminArea(orderId: SelectedOrder.Id,_status:SelectListOrderStatus);
+                            result = OrderService.ChangeOrderSatusForAdminArea(orderId: SelectedOrder.Id, _status: SelectListOrderStatus);
                             ShowMessageToUser(result);
                             GlobalUpdateView();
                             wnd.Close();
@@ -956,10 +958,16 @@ namespace Sinsay.ViewsModels.AdminVM
                 return printAll ?? new RelayCommand(obj =>
                 {
                     FlowDocument fd = new FlowDocument();
+                    string HEADER = "SINSAY\nСписок заказов\n";
+                    fd.Blocks.Add(new Paragraph(new Run(HEADER)));
+
+                    string convertDataToString = "";
                     foreach (var item in AllOrders)
                     {
-                        fd.Blocks.Add(new Paragraph(new Run(item.ToString())));
-                        // Вам может потребоваться создать метод ToString в вашем типе, если это строка, то это нормально
+                        convertDataToString = "Заказ номер: " + item.Id + "\nНаименование - " + item.Name + "\nСтатус - " + item.OrderStatus.Name + "\nEmail пользователя - " + item.AppUser.Email + "\nИмя пользователя - " + item.AppUser.UserName + "\nНомер телефона - " + item.AppUser.PhoneNumber + "\nДата заказа - " + item.OrderDate + "\nИтого - " + item.TotalPrice + "\nСпособ оплаты - " + item.PaymentMethod.Name + "\nПВЗ - " + item.PickupPoint.Name + "\nАдрес - " + item.PickupPoint.Address + "\n" + "-----------------------";
+                        fd.Blocks.Add(new Paragraph(new Run(convertDataToString.ToString())));
+                        convertDataToString = "";
+
                     }
                     PrintDialog pd = new PrintDialog();
                     if (pd.ShowDialog() != true) return;
@@ -982,13 +990,54 @@ namespace Sinsay.ViewsModels.AdminVM
                     if (SelectedOrder is not null)
                     {
                         FlowDocument fd = new FlowDocument();
-                        fd.Blocks.Add(new Paragraph(new Run(SelectedOrder.ToString())));
+                        string HEADER = "SINSAY\nЭлектронный чек № " + SelectedOrder.Id + "\n";
+                        fd.Blocks.Add(new Paragraph(new Run(HEADER)));
+                        string convertDataToString = "Наименование - " + SelectedOrder.Name + "\nСтатус - " + SelectedOrder.OrderStatus.Name + "\nEmail пользователя - " + SelectedOrder.AppUser.Email + "\nИмя пользователя - " + SelectedOrder.AppUser.UserName + "\nНомер телефона - " + SelectedOrder.AppUser.PhoneNumber + "\nДата заказа - " + SelectedOrder.OrderDate + "\nИтого - " + SelectedOrder.TotalPrice + "\nСпособ оплаты - " + SelectedOrder.PaymentMethod.Name + "\nПВЗ - " + SelectedOrder.PickupPoint.Name + "\nАдрес - " + SelectedOrder.PickupPoint.Address;
+                        fd.Blocks.Add(new Paragraph(new Run(convertDataToString.ToString())));
                         PrintDialog pd = new PrintDialog();
                         if (pd.ShowDialog() != true) return;
                         fd.PageHeight = pd.PrintableAreaHeight;
                         fd.PageWidth = pd.PrintableAreaWidth;
                         IDocumentPaginatorSource idocument = fd as IDocumentPaginatorSource;
                         pd.PrintDocument(idocument.DocumentPaginator, "Печать документа...");
+                    }
+                });
+            }
+        }
+
+        //expotToWord
+        private RelayCommand expotToWord;
+        public RelayCommand ExpotToWord
+        {
+            get
+            {
+                return expotToWord ?? new RelayCommand(obj =>
+                {
+                    if (SelectedOrder is not null)
+                    {
+                        try
+                        {
+                            var fields = new Dictionary<string, string>
+                            {
+                                {"Id",SelectedOrder.Id.ToString()},
+                                {"OrderData",SelectedOrder.OrderDate.ToString()},
+                                {"NameOrder",SelectedOrder.Name},
+                                {"TotalPrice",SelectedOrder.TotalPrice.ToString()},
+                                {"AppUserName",SelectedOrder.AppUser.UserName},
+                                {"AppUserEmail",SelectedOrder.AppUser.Email},
+                                {"AppUserPhone",SelectedOrder.AppUser.PhoneNumber},
+                                {"PickupPointName",SelectedOrder.PickupPoint.Name},
+                                {"PickupPointAddress",SelectedOrder.PickupPoint.Address}
+                            };
+                            var engine = new Engine();
+                            engine.Merge(".\\template.docx", fields, $".\\Chek\\Чек ном.{SelectedOrder.Id}.docx");
+                            MessageBox.Show("Word файл чека лежит в папке Chek", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("При экспорте данных в Word произашла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+
                     }
                 });
             }
@@ -1077,12 +1126,12 @@ namespace Sinsay.ViewsModels.AdminVM
                     //AppUser
                     if (SelectedTab.Name == "UsersTab" && SelectedAppUser is not null)
                     {
-                        result = UserService.DeleteUser(id:SelectedAppUser.Id, emailCurrUser:App.currentUser.Email);
+                        result = UserService.DeleteUser(id: SelectedAppUser.Id, emailCurrUser: App.currentUser.Email);
                     }
                     //Clothes
                     if (SelectedTab.Name == "ClothesTab" && SelectedClothes is not null)
                     {
-                       result = ClothesService.DeleteClothes(SelectedClothes.Id);
+                        result = ClothesService.DeleteClothes(SelectedClothes.Id);
                     }
                     GlobalUpdateView();
                     GlobalNullValueProp();
@@ -1097,7 +1146,7 @@ namespace Sinsay.ViewsModels.AdminVM
         #region WINDOWS SETTINGS
         private void OpenWindowCS(Window window)
         {
-            window.Owner = Application.Current.MainWindow;
+            window.Owner = System.Windows.Application.Current.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }

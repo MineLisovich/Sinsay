@@ -20,32 +20,32 @@
         <!--HEADER-->
         <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Matura MT Script Capitals" Width="200" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Arial Black" Width="200" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"  Orientation="Horizontal" >
-            <TextBlock FontFamily="Bahnschrift Condensed" FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
-            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <TextBlock FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
+            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click" Height="30" Width="90" FontSize="20" Margin="0,0,20,0"/>
         </StackPanel>
         <!--END HEADER-->
 
         <!--MAIN MENU-->
         <StackPanel Grid.Row="1" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Orientation="Horizontal">
-            <Button  Content="Товары" x:Name="clothes" Click="clothes_Click" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
-            <Button  Content="Мои заказы" x:Name="order" Click="order_Click" Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <Button  Content="Товары" x:Name="clothes" Click="clothes_Click" Height="30" Width="90" FontSize="20"/>
+            <Button  Content="Мои заказы" x:Name="order" Click="order_Click" Margin="20,0,0,0"  Height="30" Width="115" FontSize="20"/>
         </StackPanel>
         <!--END MAIN MENU-->
 
         <!--CREATE ORDER-->
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
-            <TextBlock Text="Итого: "  FontFamily="Bahnschrift Condensed" FontSize="16"></TextBlock>
-            <TextBlock x:Name="TotalPrice" Text="{Binding TotalPrice}" FontFamily="Bahnschrift Condensed" FontSize="18"></TextBlock>
-            <Button Content="Оформить заказ" Command="{Binding OpenCreateOrder}" FontFamily="Bahnschrift Condensed" FontSize="18" Margin="5,0,0,0"></Button>
+            <TextBlock Text="Итого: " FontSize="18" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TotalPrice" Text="{Binding TotalPrice}" FontSize="18"/>
+            <Button Content="Оформить заказ" Command="{Binding OpenCreateOrder}" FontSize="18" Margin="20,0,0,0"/>
         </StackPanel>
         <!--END CREATE ORDER-->
 
         <!--CLOTHES LIST-->
-        <ListView x:Name="ViewShoppingCart" Grid.Row="3" ItemsSource="{Binding ShoppingCarts}" SelectedItem="{Binding SelectedShoppingCart}">
+        <ListView x:Name="ViewShoppingCart" Grid.Row="3" ItemsSource="{Binding ShoppingCarts}" SelectedItem="{Binding SelectedShoppingCart}" FontSize="16">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Удалить из корзины"  Command="{Binding DeleteToShopingCart}" CommandParameter="{Binding ElementName=ShoppingCartWND}"/>

@@ -9,43 +9,43 @@
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
         Name="MainPageUserAreaWND">
-    <Grid>
+    <Grid RenderTransformOrigin="0.5,0.473">
         <Grid.RowDefinitions>
             <RowDefinition  Height="40"/>
             <RowDefinition  Height="40"/>
             <RowDefinition  Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <!--HEADER--> 
+        <!--HEADER-->
         <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Matura MT Script Capitals" Width="200" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Arial Black" Width="200" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"  Orientation="Horizontal" >
-            <TextBlock FontFamily="Bahnschrift Condensed" FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
-            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <TextBlock FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
+            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click" Height="30" Width="90" FontSize="20" Margin="0,0,20,0"/>
         </StackPanel>
         <!--END HEADER-->
-        
+
         <!--MAIN MENU-->
         <StackPanel Grid.Row="1" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Orientation="Horizontal">
-            <Button  Content="Изменить пароль" Command="{Binding OpenChangePassword}" Height="30" Width="150" FontFamily="Bahnschrift Condensed" FontSize="20"/>
-            <Button  Content="Корзина" x:Name="shoppingCart" Click="shoppingCart_Click" Margin="20,0,0,0" Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
-            <Button  Content="Мои заказы" x:Name="order" Click="order_Click" Margin="20,0,0,0"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <Button  Content="Изменить пароль" Command="{Binding OpenChangePassword}" Height="30" Width="172" FontSize="20"/>
+            <Button  Content="Корзина" x:Name="shoppingCart" Click="shoppingCart_Click" Margin="20,0,0,0" Height="30" Width="90" FontSize="20"/>
+            <Button  Content="Мои заказы" x:Name="order" Click="order_Click" Margin="20,0,0,0"  Height="30" Width="115" FontSize="20" VerticalAlignment="Center"/>
         </StackPanel>
         <!--END MAIN MENU-->
-        
+
         <!--SEARCH-->
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-            <TextBox Width="365" Text="{Binding SearchClothes}" TextAlignment="Center" ToolTip="Поиск" />
-            <Button Content="Искать" Command="{Binding SearchClothesCom}"  FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
-            <Button Content="Очистить"  Command="{Binding ClearSearchClothesCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
+            <TextBox Width="365" Text="{Binding SearchClothes}" TextAlignment="Center" ToolTip="Поиск" FontSize="18" />
+            <Button Content="Искать" Command="{Binding SearchClothesCom}" FontSize="15"/>
+            <Button Content="Очистить"  Command="{Binding ClearSearchClothesCom}" FontSize="15" Margin="5,0,0,0"/>
         </StackPanel>
         <!--END SEARCH-->
-        
+
         <!--CLOTHES LIST-->
-        <ListView x:Name="ViewAllClothesUserArea" Grid.Row="3" ItemsSource="{Binding AllClothes}" SelectedItem="{Binding SelectedClothes}">
+        <ListView x:Name="ViewAllClothesUserArea" Grid.Row="3" ItemsSource="{Binding AllClothes}" SelectedItem="{Binding SelectedClothes}" FontSize="16">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Добавить в корзину" Command="{Binding AddToShopingCart}" CommandParameter="{Binding ElementName=MainPageUserAreaWND}"/>
