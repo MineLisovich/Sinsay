@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Sinsay"
         mc:Ignorable="d"
         Title="Sinsay" Height="720" Width="1024"
-         WindowStartupLocation="CenterScreen">
+         WindowStartupLocation="CenterScreen"
+         >
     <Grid RenderTransformOrigin="0.5,0.473">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

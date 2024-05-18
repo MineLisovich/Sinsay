@@ -11,16 +11,16 @@
         Name="MainPageUserAreaWND">
     <Grid RenderTransformOrigin="0.5,0.473">
         <Grid.RowDefinitions>
-            <RowDefinition  Height="40"/>
+            <RowDefinition  Height="80"/>
             <RowDefinition  Height="40"/>
             <RowDefinition  Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--HEADER-->
         <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Orientation="Horizontal">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Arial Black" Width="200" VerticalAlignment="Center"/>
-            </StackPanel>
+         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="60" Height="83" FontWeight="Bold" Width="246"/>
+        </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"  Orientation="Horizontal" >
             <TextBlock FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
