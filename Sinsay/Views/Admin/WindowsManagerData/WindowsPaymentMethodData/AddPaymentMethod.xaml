@@ -9,22 +9,28 @@
         WindowStartupLocation="CenterScreen"
         Name="AddPaymentWND">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF444444" Offset="1"/>
+                <GradientStop Color="White" Offset="0.277"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock x:Name="TBlockHeder" Text="Добавление способа оплаты" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="56" Width="285" FontFamily="Bahnschrift Condensed"/>
+                <TextBlock x:Name="TBlockHeder" Text="Добавление способа оплаты" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="56" Width="397" />
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Наименование:</Label>
-                    <TextBox x:Name="tb_name" Text="{Binding NamePaymentMethod}" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <Label  FontSize="18">Наименование:</Label>
+                    <TextBox x:Name="tb_name" Text="{Binding NamePaymentMethod}" Width="365" Height="27"  FontSize="18"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 0">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button x:Name="Add" Command="{Binding AddNewPaymentMethod}" CommandParameter="{Binding ElementName=AddPaymentWND}" Content="Добавить"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="22"></Button>
+                    <Button x:Name="Add" Command="{Binding AddNewPaymentMethod}" CommandParameter="{Binding ElementName=AddPaymentWND}" Content="Добавить"  Height="35" Width="100"  FontSize="22"></Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

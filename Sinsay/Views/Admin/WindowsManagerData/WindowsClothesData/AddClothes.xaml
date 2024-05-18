@@ -9,42 +9,48 @@
         WindowStartupLocation="CenterScreen"
          Name="AddClothesWND">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF444444" Offset="1"/>
+                <GradientStop Color="White" Offset="0.277"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock x:Name="TBlockHeder" Text="Добавление товара" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="56" Width="219" FontFamily="Bahnschrift Condensed"/>
+                <TextBlock x:Name="TBlockHeder" Text="Добавление товара" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="56" Width="273"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Наименование:</Label>
-                    <TextBox x:Name="tb_name" Text="{Binding ClothesName}" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <Label FontSize="18">Наименование:</Label>
+                    <TextBox x:Name="tb_name" Text="{Binding ClothesName}" Width="365" Height="27"  FontSize="18"></TextBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Описание:</Label>
-                    <TextBox x:Name="tb_description" Text="{Binding ClothesDescription}" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <Label  FontSize="18">Описание:</Label>
+                    <TextBox x:Name="tb_description" Text="{Binding ClothesDescription}" Width="365" Height="27"  FontSize="18"></TextBox>
                 </StackPanel>
             </StackPanel>
             
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Количество:</Label>
-                    <TextBox x:Name="tb_count" Text="{Binding ClothesCount}" Width="365" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <Label  FontSize="18">Количество:</Label>
+                    <TextBox x:Name="tb_count" Text="{Binding ClothesCount}" Width="365" Height="27"  FontSize="18"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-                    <Label FontFamily="Bahnschrift Condensed" FontSize="18">Цена:</Label>
-                    <TextBox x:Name="tb_price" Text="{Binding ClothesPrice}" Width="170" Height="27" FontFamily="Bahnschrift Condensed" FontSize="22" Margin="10,0,0,0"></TextBox>
+                    <Label FontSize="18">Цена:</Label>
+                    <TextBox x:Name="tb_price" Text="{Binding ClothesPrice}" Width="170" Height="27" FontSize="18"></TextBox>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 0">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button Command="{Binding AddClothes}" CommandParameter="{Binding ElementName=AddClothesWND}" Content="Добавить"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="22"></Button>
+                    <Button Command="{Binding AddClothes}" CommandParameter="{Binding ElementName=AddClothesWND}" Content="Добавить"  Height="35" Width="100"  FontSize="22"></Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

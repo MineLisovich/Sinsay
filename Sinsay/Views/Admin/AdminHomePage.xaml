@@ -17,19 +17,19 @@
         <!--HEADER-->
         <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" FontFamily="Matura MT Script Capitals" Width="200" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TBlockLogo" Text="Sinsay" HorizontalAlignment="Center" TextAlignment="Center" FontSize="30" Height="35" FontWeight="Bold" Width="200" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"  Orientation="Horizontal">
-            <TextBlock FontFamily="Bahnschrift Condensed" FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
-            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click"  Height="30" Width="90" FontFamily="Bahnschrift Condensed" FontSize="20"/>
+            <TextBlock FontSize="18" x:Name="TbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"><Run Text="Привет, Имя"/></TextBlock>
+            <Button x:Name="LogOut" Content="Выйти" Click="LogOut_Click"  Height="30" Width="90" FontSize="20" Margin="0,0,20,0"/>
         </StackPanel>
         <!--END HEADER-->
         <TabControl Grid.Row="1" SelectedItem="{Binding SelectedTab}">
             <!--Товары-->
             <TabItem Name="ClothesTab">
                 <TabItem.Header>
-                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Товары"/>
+                    <TextBlock FontSize="16"  Text="Товары"/>
                 </TabItem.Header>
                 <TabItem.ContextMenu>
                     <ContextMenu>
@@ -45,12 +45,12 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                        <TextBox Width="365" Text="{Binding SearchClothes}" TextAlignment="Center" ToolTip="Поиск" />
-                        <Button Content="Искать" Command="{Binding SearchClothesCom}"  FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
-                        <Button Content="Очистить" Command="{Binding ClearSearchClothesCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
+                        <TextBox Width="365" Text="{Binding SearchClothes}" TextAlignment="Center" ToolTip="Поиск" FontSize="18" />
+                        <Button Content="Искать" Command="{Binding SearchClothesCom}" FontSize="15"/>
+                        <Button Content="Очистить" Command="{Binding ClearSearchClothesCom}" FontSize="15" Margin="5,0,0,0"/>
                     </StackPanel>
 
-                    <ListView Grid.Row="1" x:Name="ViewAllClothes" ItemsSource="{Binding AllClothes}" SelectedItem="{Binding SelectedClothes}">
+                    <ListView Grid.Row="1" x:Name="ViewAllClothes" ItemsSource="{Binding AllClothes}" SelectedItem="{Binding SelectedClothes}" FontSize="16">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Артикул" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -64,14 +64,14 @@
                        
                     </ListView>
                    
-                    <Button Grid.Row="2" Content="Добавить" Command="{Binding OpenAddClothes}" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" Content="Добавить" Command="{Binding OpenAddClothes}" FontSize="20"/>
                 </Grid>
             </TabItem>
             <!--END Товары-->
             <!--Магазины-->
             <TabItem Name="PickupTab">
                 <TabItem.Header>
-                    <TextBlock FontFamily="Bahnschrift Condensed"  FontSize="16" Text="Магазины"/>
+                    <TextBlock  FontSize="16" Text="Магазины"/>
                 </TabItem.Header>
                 <TabItem.ContextMenu>
                     <ContextMenu>
@@ -87,12 +87,12 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                        <TextBox Width="365" Text="{Binding SearchPickup}" TextAlignment="Center" ToolTip="Поиск" />
-                        <Button Content="Искать" Command="{Binding SearchPickupCom}"  FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
-                        <Button Content="Очистить" Command="{Binding ClearSearchPickupCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
+                        <TextBox Width="365" Text="{Binding SearchPickup}" TextAlignment="Center" ToolTip="Поиск" FontSize="18" />
+                        <Button Content="Искать" Command="{Binding SearchPickupCom}"   FontSize="15"></Button>
+                        <Button Content="Очистить" Command="{Binding ClearSearchPickupCom}"  FontSize="15" Margin="5,0,0,0"></Button>
                     </StackPanel>
 
-                    <ListView x:Name="ViewAllPickupPoint" ItemsSource="{Binding AllPickupPoint}" SelectedItem="{Binding SelectedPickupPoint}" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2">
+                    <ListView x:Name="ViewAllPickupPoint" ItemsSource="{Binding AllPickupPoint}" SelectedItem="{Binding SelectedPickupPoint}" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2" FontSize="16">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -102,14 +102,14 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Command="{Binding OpenAddPickupPoint}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20" Grid.ColumnSpan="2"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAddPickupPoint}" Content="Добавить"  FontSize="20" Grid.ColumnSpan="2"></Button>
                 </Grid>
             </TabItem>
             <!--END Магазины-->
             <!--Модерация заказов-->
             <TabItem Name="OrdesTab">
                 <TabItem.Header>
-                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Модерация заказов"/>
+                    <TextBlock FontSize="16"  Text="Модерация заказов"/>
                 </TabItem.Header>
                 <TabItem.ContextMenu>
                     <ContextMenu>
@@ -127,13 +127,13 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                        <TextBox Width="365" Text="{Binding SearchOrder}" TextAlignment="Center" ToolTip="Поиск" />
-                        <Button Content="Искать"  Command="{Binding SearchOrderCom}" FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
-                        <Button Content="Очистить" Command="{Binding ClearSearchOrderCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
-                        <Button Content="Печатать всё" Command="{Binding PrintAll}"   FontFamily="Bahnschrift Condensed" FontSize="15" Margin="50,0,0,0"></Button>
+                        <TextBox Width="365" Text="{Binding SearchOrder}" TextAlignment="Center" ToolTip="Поиск" FontSize="18" />
+                        <Button Content="Искать"  Command="{Binding SearchOrderCom}"  FontSize="15"></Button>
+                        <Button Content="Очистить" Command="{Binding ClearSearchOrderCom}"  FontSize="15" Margin="5,0,0,0"></Button>
+                        <Button Content="Печатать всё" Command="{Binding PrintAll}"    FontSize="15" Margin="50,0,0,0"></Button>
                     </StackPanel>
 
-                    <ListView Grid.Row="1" x:Name="ViewAllOrders" ItemsSource="{Binding AllOrders}" SelectedItem="{Binding SelectedOrder}">
+                    <ListView Grid.Row="1" x:Name="ViewAllOrders" ItemsSource="{Binding AllOrders}" SelectedItem="{Binding SelectedOrder}" FontSize="16">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Номер заказа" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -156,7 +156,7 @@
             <!--Уч записи-->
             <TabItem Name="UsersTab">
                 <TabItem.Header>
-                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Управление учётными записями"/>
+                    <TextBlock FontSize="16"  Text="Управление учётными записями"/>
                 </TabItem.Header>
                 <TabItem.ContextMenu>
                     <ContextMenu>
@@ -174,12 +174,12 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                        <TextBox Width="365" Text="{Binding SearchUser}" TextAlignment="Center" ToolTip="Поиск" />
-                        <Button Content="Искать" Command="{Binding SearchUserCom}"  FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
-                        <Button Content="Очистить" Command="{Binding ClearSearchUserCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
+                        <TextBox Width="365" Text="{Binding SearchUser}" TextAlignment="Center" ToolTip="Поиск" FontSize="18" />
+                        <Button Content="Искать" Command="{Binding SearchUserCom}"   FontSize="15"></Button>
+                        <Button Content="Очистить" Command="{Binding ClearSearchUserCom}"   FontSize="15" Margin="5,0,0,0"></Button>
                     </StackPanel>
 
-                    <ListView x:Name="ViewAllAppUsers" ItemsSource="{Binding AllAppUsers}" SelectedItem="{Binding SelectedAppUser}" Grid.Row="1">
+                    <ListView x:Name="ViewAllAppUsers" ItemsSource="{Binding AllAppUsers}" SelectedItem="{Binding SelectedAppUser}" Grid.Row="1" FontSize="16">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -192,7 +192,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Command="{Binding OpenAddAppUser}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAddAppUser}" Content="Добавить" FontSize="20"></Button>
                 </Grid>
 
             </TabItem>
@@ -200,7 +200,7 @@
             <!--Справочник города-->
             <TabItem Name="CityTab">
                 <TabItem.Header>
-                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Города"/>
+                    <TextBlock FontSize="16"  Text="Справочник: Города"/>
                 </TabItem.Header>
                 <TabItem.ContextMenu>
                     <ContextMenu>
@@ -215,11 +215,11 @@
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                        <TextBox Width="365" Text="{Binding SearchCity}" TextAlignment="Center" ToolTip="Поиск" />
-                        <Button Content="Искать" Command="{Binding SearchCityCom}"  FontFamily="Bahnschrift Condensed" FontSize="15"></Button>
-                        <Button Content="Очистить" Command="{Binding ClearSearchCityCom}"  FontFamily="Bahnschrift Condensed" FontSize="15" Margin="5,0,0,0"></Button>
+                        <TextBox Width="365" Text="{Binding SearchCity}" TextAlignment="Center" ToolTip="Поиск" FontSize="18" />
+                        <Button Content="Искать" Command="{Binding SearchCityCom}"   FontSize="15"></Button>
+                        <Button Content="Очистить" Command="{Binding ClearSearchCityCom}"  FontSize="15" Margin="5,0,0,0"></Button>
                     </StackPanel>
-                    <ListView x:Name="ViewAllCities" Grid.Row="1" ItemsSource="{Binding AllCities}" SelectedItem="{Binding SelectedCity}">
+                    <ListView x:Name="ViewAllCities" Grid.Row="1" ItemsSource="{Binding AllCities}" SelectedItem="{Binding SelectedCity}" FontSize="16">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -227,14 +227,14 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" x:Name="AddCity" Command="{Binding OpenAddCityWnd}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" x:Name="AddCity" Command="{Binding OpenAddCityWnd}" Content="Добавить"  FontSize="20"></Button>
                 </Grid>
             </TabItem>
             <!--END Справочник города-->
             <!--Справочник статусы заказов-->
             <TabItem Name="OrderStatusTab">
                 <TabItem.Header>
-                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Статусы заказа"/>
+                    <TextBlock FontSize="16"  Text="Справочник: Статусы заказа"/>
                 </TabItem.Header>
                 <TabItem.ContextMenu>
                     <ContextMenu>
@@ -247,7 +247,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <ListView x:Name="ViewAllOrderStatus" ItemsSource="{Binding AllOrderStatuses}" SelectedItem="{Binding SelectedOrderStatus}" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2">
+                    <ListView x:Name="ViewAllOrderStatus" ItemsSource="{Binding AllOrderStatuses}" SelectedItem="{Binding SelectedOrderStatus}" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2" FontSize="16">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -255,14 +255,14 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Command="{Binding OpenAddOrderStatusWnd}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20" Grid.ColumnSpan="2"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAddOrderStatusWnd}" Content="Добавить"  FontSize="20" Grid.ColumnSpan="2"></Button>
                 </Grid>
 
             </TabItem>
             <!--END Способы оплаты-->
             <TabItem Name="PaymentMethodsTab">
                 <TabItem.Header>
-                    <TextBlock FontFamily="Bahnschrift Condensed" FontSize="16"  Text="Справочник: Способы оплаты"/>
+                    <TextBlock  FontSize="16"  Text="Справочник: Способы оплаты" TextWrapping="Wrap"/>
                 </TabItem.Header>
                 <TabItem.ContextMenu>
                     <ContextMenu>
@@ -275,7 +275,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <ListView x:Name="ViewAllPaymentMethods" Grid.Row="0" ItemsSource="{Binding AllPaymentMethods}" SelectedItem="{Binding SelectedPaymentMethod}">
+                    <ListView x:Name="ViewAllPaymentMethods" Grid.Row="0" ItemsSource="{Binding AllPaymentMethods}" SelectedItem="{Binding SelectedPaymentMethod}" FontSize="16">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -283,7 +283,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Grid.Row="2" Command="{Binding OpenAddPaymentMethod}" Content="Добавить" FontFamily="Bahnschrift Condensed" FontSize="20"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAddPaymentMethod}" Content="Добавить" FontSize="20"></Button>
                 </Grid>
 
             </TabItem>
