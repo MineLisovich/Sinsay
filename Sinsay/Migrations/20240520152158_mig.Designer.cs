@@ -12,7 +12,7 @@ using Sinsay.Domain;
 namespace Sinsay.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240516175836_mig")]
+    [Migration("20240520152158_mig")]
     partial class mig
     {
         /// <inheritdoc />
@@ -69,6 +69,7 @@ namespace Sinsay.Migrations
                             Id = 1,
                             Email = "admin@sinsay.ru",
                             PasswordHash = "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270",
+                            PhoneNumber = "+767644566",
                             RoleId = 1,
                             UserName = "Админ",
                             isBloced = false
@@ -78,6 +79,7 @@ namespace Sinsay.Migrations
                             Id = 2,
                             Email = "user@sinsay.ru",
                             PasswordHash = "831c237928e6212bedaa4451a514ace3174562f6761f6a157a2fe5082b36e2fb",
+                            PhoneNumber = "+789324325676",
                             RoleId = 2,
                             UserName = "Иванов",
                             isBloced = false
