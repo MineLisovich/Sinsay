@@ -11,7 +11,7 @@ namespace Sinsay.Domain.Predefined
             Email = "admin@sinsay.ru",
             UserName = "Админ",
             PasswordHash = PasswordHashService.CreateHash("admin1234"),
-            PhoneNumber = null,
+            PhoneNumber = "+767644566",
             RoleId = 1,
             LastVisit = null,
             isBloced = false
@@ -23,7 +23,7 @@ namespace Sinsay.Domain.Predefined
             Email = "user@sinsay.ru",
             UserName = "Иванов",
             PasswordHash = PasswordHashService.CreateHash("user1234"),
-            PhoneNumber = null,
+            PhoneNumber = "+789324325676",
             RoleId = 2,
             LastVisit = null,
             isBloced = false

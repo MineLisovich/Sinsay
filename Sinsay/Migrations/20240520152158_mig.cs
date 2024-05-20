@@ -542,8 +542,8 @@ namespace Sinsay.Migrations
                 columns: new[] { "Id", "Email", "LastVisit", "PasswordHash", "PhoneNumber", "RoleId", "UserName", "isBloced" },
                 values: new object[,]
                 {
-                    { 1, "admin@sinsay.ru", null, "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270", null, 1, "Админ", false },
-                    { 2, "user@sinsay.ru", null, "831c237928e6212bedaa4451a514ace3174562f6761f6a157a2fe5082b36e2fb", null, 2, "Иванов", false }
+                    { 1, "admin@sinsay.ru", null, "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270", "+767644566", 1, "Админ", false },
+                    { 2, "user@sinsay.ru", null, "831c237928e6212bedaa4451a514ace3174562f6761f6a157a2fe5082b36e2fb", "+789324325676", 2, "Иванов", false }
                 });
 
             migrationBuilder.CreateIndex(
