@@ -24,6 +24,7 @@ namespace Sinsay.Domain
         protected override void OnConfiguring (DbContextOptionsBuilder opts)
         {
             opts.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=sinsaydb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            //.\SQLEXPRESS;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
